@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:tns="http://avatax.avalara.com/services" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" name="LocalSvc" targetNamespace="http://avatax.avalara.com/services" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://avatax.avalara.com/services/Imports">
+      <xsd:import schemaLocation="http://localhost:8080/AvaTaxLocal/Local/LocalSvc?xsd=xsd0" namespace="http://avatax.avalara.com/services" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="LocalSvc_Ping_InputMessage">
+    <wsdl:part name="parameters" element="tns:Ping" />
+  </wsdl:message>
+  <wsdl:message name="LocalSvc_Ping_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PingResponse" />
+  </wsdl:message>
+  <wsdl:message name="LocalSvc_IsAuthorized_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsAuthorized" />
+  </wsdl:message>
+  <wsdl:message name="LocalSvc_IsAuthorized_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsAuthorizedResponse" />
+  </wsdl:message>
+  <wsdl:message name="LocalSvc_GetUpdates_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUpdates" />
+  </wsdl:message>
+  <wsdl:message name="LocalSvc_GetUpdates_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUpdatesResponse" />
+  </wsdl:message>
+  <wsdl:message name="LocalSvc_PostTransactions_InputMessage">
+    <wsdl:part name="parameters" element="tns:PostTransactions" />
+  </wsdl:message>
+  <wsdl:message name="LocalSvc_PostTransactions_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PostTransactionsResponse" />
+  </wsdl:message>
+  <wsdl:message name="LocalSvc_ConfigSettingFetch_InputMessage">
+    <wsdl:part name="parameters" element="tns:ConfigSettingFetch" />
+  </wsdl:message>
+  <wsdl:message name="LocalSvc_ConfigSettingFetch_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ConfigSettingFetchResponse" />
+  </wsdl:message>
+  <wsdl:message name="LocalSvc_ConfigSettingSave_InputMessage">
+    <wsdl:part name="parameters" element="tns:ConfigSettingSave" />
+  </wsdl:message>
+  <wsdl:message name="LocalSvc_ConfigSettingSave_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ConfigSettingSaveResponse" />
+  </wsdl:message>
+  <wsdl:message name="LocalSvc_GetInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetInfo" />
+  </wsdl:message>
+  <wsdl:message name="LocalSvc_GetInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetInfoResponse" />
+  </wsdl:message>
+  <wsdl:portType name="LocalSvc">
+    <wsdl:operation name="Ping">
+      <wsdl:input wsaw:Action="http://avatax.avalara.com/services/Ping" message="tns:LocalSvc_Ping_InputMessage" />
+      <wsdl:output wsaw:Action="http://avatax.avalara.com/services/LocalSvc/PingResponse" message="tns:LocalSvc_Ping_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IsAuthorized">
+      <wsdl:input wsaw:Action="http://avatax.avalara.com/services/IsAuthorized" message="tns:LocalSvc_IsAuthorized_InputMessage" />
+      <wsdl:output wsaw:Action="http://avatax.avalara.com/services/LocalSvc/IsAuthorizedResponse" message="tns:LocalSvc_IsAuthorized_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUpdates">
+      <wsdl:input wsaw:Action="http://avatax.avalara.com/services/GetUpdates" message="tns:LocalSvc_GetUpdates_InputMessage" />
+      <wsdl:output wsaw:Action="http://avatax.avalara.com/services/LocalSvc/GetUpdatesResponse" message="tns:LocalSvc_GetUpdates_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PostTransactions">
+      <wsdl:input wsaw:Action="http://avatax.avalara.com/services/PostTransactions" message="tns:LocalSvc_PostTransactions_InputMessage" />
+      <wsdl:output wsaw:Action="http://avatax.avalara.com/services/LocalSvc/PostTransactionsResponse" message="tns:LocalSvc_PostTransactions_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ConfigSettingFetch">
+      <wsdl:input wsaw:Action="http://avatax.avalara.com/services/ConfigSettingFetch" message="tns:LocalSvc_ConfigSettingFetch_InputMessage" />
+      <wsdl:output wsaw:Action="http://avatax.avalara.com/services/LocalSvc/ConfigSettingFetchResponse" message="tns:LocalSvc_ConfigSettingFetch_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ConfigSettingSave">
+      <wsdl:input wsaw:Action="http://avatax.avalara.com/services/ConfigSettingSave" message="tns:LocalSvc_ConfigSettingSave_InputMessage" />
+      <wsdl:output wsaw:Action="http://avatax.avalara.com/services/LocalSvc/ConfigSettingSaveResponse" message="tns:LocalSvc_ConfigSettingSave_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInfo">
+      <wsdl:input wsaw:Action="http://avatax.avalara.com/services/GetInfo" message="tns:LocalSvc_GetInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://avatax.avalara.com/services/LocalSvc/GetInfoResponse" message="tns:LocalSvc_GetInfo_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_LocalSvc" type="tns:LocalSvc">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Ping">
+      <soap:operation soapAction="http://avatax.avalara.com/services/Ping" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IsAuthorized">
+      <soap:operation soapAction="http://avatax.avalara.com/services/IsAuthorized" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUpdates">
+      <soap:operation soapAction="http://avatax.avalara.com/services/GetUpdates" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PostTransactions">
+      <soap:operation soapAction="http://avatax.avalara.com/services/PostTransactions" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConfigSettingFetch">
+      <soap:operation soapAction="http://avatax.avalara.com/services/ConfigSettingFetch" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConfigSettingSave">
+      <soap:operation soapAction="http://avatax.avalara.com/services/ConfigSettingSave" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInfo">
+      <soap:operation soapAction="http://avatax.avalara.com/services/GetInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="LocalSvc">
+    <wsdl:port name="BasicHttpBinding_LocalSvc" binding="tns:BasicHttpBinding_LocalSvc">
+      <soap:address location="http://localhost:8080/AvaTaxLocal/Local/LocalSvc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,177 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>AvaTax4J Read Me</title>
+<LINK REL ="stylesheet" TYPE="text/css" HREF="doc/api/stylesheet.css" TITLE="Style">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+
+<body style="margin-top:0">
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+	<TR>
+	<TD COLSPAN=3 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+		<h1>AvaTaxAccount4J Readme</h1>
+	</TD>
+</TR>
+</TABLE>
+<p>This is a Java client adapter for Avalara AvaTax web services. This version 
+  has support for the AvaTax account service. <strong>It is for internal use and 
+  approved customers only.</strong></p>
+<p>The adapter was built using Apache Axis WSDL2Java to build the stubs which 
+  were then enhanced to support a custom Profile SOAP header element and a WS-Security 
+  UsernameToken SOAP header element.</p>
+<p>A set of JUnit tests are provided as examples. You may wish to refer to .NET/COM 
+  documentation for more details.</p>
+<p><strong>YOU MUST CONFIGURE avatax4j.properties before running tests or samples!</strong><br>
+  Use avatax4j.properties.sample as an example and insert your account and license.</p>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+  <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"> 
+    <TD COLSPAN=2><FONT SIZE="+2"> <B>Contents</B></FONT></TD>
+  </TR>
+  <TR BGCOLOR="white" CLASS="TableRowColor"> 
+    <TD WIDTH="20%">/doc/api</TD>
+    <TD><a href="doc/api/index.html">Javadocs - API Documentation</a></TD>
+  </TR>
+  <TR BGCOLOR="white" CLASS="TableRowColor"> 
+    <TD>/lib</TD>
+    <TD>All required jars</TD>
+  </TR>
+  <TR BGCOLOR="white" CLASS="TableRowColor"> 
+    <TD>/samples</TD>
+    <TD><p>n/a</p>
+      </TD>
+  </TR>
+  <TR BGCOLOR="white" CLASS="TableRowColor"> 
+    <TD>/src</TD>
+    <TD>Full source code</TD>
+  </TR>
+  <TR BGCOLOR="white" CLASS="TableRowColor"> 
+    <TD>/test</TD>
+    <TD>AccountSvcTest JUnit test class to be used as an example.</TD>
+  </TR>
+  <TR BGCOLOR="white" CLASS="TableRowColor"> 
+    <TD>avatax4j.properties.sample</TD>
+    <TD>Sample properties file for JUnit tests to configure url, account, license<br>
+      This must be renamed to avatax4.properties and configured prior to running 
+      the unit tests.</TD>
+  </TR>
+  <TR BGCOLOR="white" CLASS="TableRowColor"> 
+    <TD>build.xml</TD>
+    <TD>Ant build script. Run &quot;ant&quot; for usage instructions</TD>
+  </TR>
+</TABLE>
+
+<h2>Dependencies</h2>
+<p>All dependent jar files are included for build and running.</p>
+<ul>
+  <li><a href="http://java.sun.com/javase/downloads/index_jdk5.jsp" target="_blank"> 
+    JDK 5.0</a> or later 
+    <ul>
+      <li>avatax4j should be compatible with <a href="http://java.sun.com/j2se/1.4.2/download.html" target="_blank">J2SDK 
+        1.4.2</a> , but we no longer provide support for this version. You will 
+        need to use the cacert file from JDK 5.0.</li>
+    </ul>
+  </li>
+  <li><a href="http://ant.apache.org/bindownload.cgi" target="_blank">Apache Ant 
+    1.6.x</a> or later</li>
+</ul>
+<h2>Getting Started</h2>
+<ol>
+  <li>Look at the examples in the samples directory.</li>
+  <li>Look at the unit tests for more examples.</li>
+  <li>Read the <a href="doc/api/index.html">Javadocs</a></li>
+  <li>Configure avatax4j.properties.Use avatax4j.properties.sample as an example 
+    and insert your account and license.</li>
+  <li>Run the samples and unit tests. See build instructions below.</li>
+</ol>
+<h2>Build Instructions</h2>
+<p>A complete Ant build.xml script is provided in the root directory. Here is 
+  a list of the main target Ant tasks.</p>
+<ul>
+  <li>compile - compiles everything</li>
+  <li>javadoc - builds the javadocs</li>
+  <li>test - runs the junit tests</li>
+  <li>clean - cleans up all generated files and directories</li>
+  <li>jar - creates the avataxAccount4j.jar file</li>
+  <li>usage - provides help on using the build tool (default)</li>
+</ul>
+<h2>Deployment</h2>
+<p>Many applications will only need to deploy the avataxAccount4j.jar and avatax4j.properties 
+  file. The avatax4j.properties file can be eliminated by setting the server url, 
+  username and password credentials in your code. Examples of this can be found 
+  in any of the junit test suites.</p>
+<p>Some applications may require deployment of additional jar files from the lib 
+  folder. These are all standard Sun, Apache, or other open-source components. 
+  The version is indicated in most of the jar file names, but avatax4j should 
+  be generally compatible with later versions. The axis-ant.jar, junit.jar, wsdl4j.jar 
+  are only used for building and testing avatax4j.</p>
+<h2>Change History</h2>
+<h4>5.3.0.0 - Nov 2008</h4>
+<ol>
+  <li>Updated to the 5.3.0 AccountSvc interface.</li>
+</ol>
+<h4>4.15.0 - June 2007</h4>
+<ol>
+  <li>Eliminated backward compatibility issue with AvaTax server API changes. 
+    Previously if new elements were added to the server api, it was necessary 
+    to either get a new adapter or make sure that the avataxAccount4j.jar preceeded 
+    axis.jar on the classpath. This was problematic or not possible in some environments. 
+    We are handling this issue now and no longer depend on the classpath order. 
+    Updating the adapter for server API changes is not necessary except when you 
+    wish to use the new features. Backward compatibility will be maintained. We 
+    highly recommend updgrading to this new adapter. No code changes should be 
+    necessary. The interface has not been changed.</li>
+</ol>
+<h4>4.14.0 - May 2007</h4>
+<ol>
+  <li>Eliminated need for wss4j-1.1.0.jar, opensaml-1.0.1.jar, and xmlsec-1.2.1.jar 
+    files. The SOAP security token is now directly built in BaseSvcSoapStub.setSecurity(). 
+    The only required code change is in the wsdd configuration. See the next change 
+    for details.<br>
+  </li>
+  <li>Eliminated the need for the avatax4j.wsdd file. You should simply call the 
+    default AddressSvcLocator() or TaxSvcLocator() constructor instead of passing 
+    a config file (new FileProvider(&quot;avatax4j.wsdd&quot;)). If you wish to 
+    still use a wsdd config file, then you need to remove the &lt;handler type=&quot;java:org.apache.ws.axis.security.WSDoAllSender&quot; 
+    &gt; handler. This is because we no longer use wss4j. See any of the samples 
+    or junit tests for code examples. The handler has been removed from the included 
+    avataxj4.wsdd, but it isn't necessary if you just use the default locator 
+    constructors. <br>
+  </li>
+  <li>Included the activation.jar and mailapi.jar files to eliminate the annoying, 
+    but inocuous &quot;Unable to find required classes (javax.activation.DataHandler 
+    and javax.mail.internet.MimeMultipart). Attachment support is disabled&quot; 
+    warning message.</li>
+</ol>
+<h2>Known Issues</h2>
+<ol>
+  <li>If you get a warning message regarding Xalan as follows:<br>
+    <br>
+    Unable to patch xalan function table.<br>
+    java.lang.NoSuchFieldException: m_functions<br>
+    at java.lang.Class.getField(Unknown Source)<br>
+    at org.apache.xml.security.Init.registerHereFunction(Init.java:429)<br>
+    at org.apache.xml.security.Init.init(Init.java:124)&#8230; (and so on)<br>
+    <br>
+    You need to copy the xalan-2.6.0.jar to your JAVA_HOME/lib/endorsed/ directory. 
+    You may need to create the endorsed directory.<br>
+  </li>
+  <li>Axis BeanDeserializer failes with unrecognized SOAP response elements.<br>
+    <em><br>
+    This issue has been fixed in the 4.15.0 release<br>
+    </em></li>
+  <li>Ant test target cannot find the junit task:<br>
+    <br>
+    The easiest way to fix this is to copy the junit jar from the avatax4j/lib 
+    directory to your ant/lib directory.<br>
+  </li>
+  <li>Warning message: &quot;Unable to find required classes (javax.activation.DataHandler 
+    and javax.mail.internet.MimeMultipart). Attachment support is disabled&quot; 
+    occurs. <br>
+    <br>
+    You need to include the activation.jar and mailapi.jar (included in releases 
+    4.14.0 and later). Or you can download these at: <a href="http://java.sun.com/products/javabeans/jaf/downloads/index.html" target="_blank">http://java.sun.com/products/javabeans/jaf/downloads/index.html</a> 
+    and <a href="http://java.sun.com/products/javamail/downloads/index.html" target="_blank">http://java.sun.com/products/javamail/downloads/index.html</a></li>
+</ol>
+</body>
+</html>
