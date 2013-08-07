@@ -32,7 +32,7 @@ import java.net.UnknownHostException;
  * </pre>
  *
  * @author brianh
- * Copyright (c) 2005, Avalara.  All rights reserved.
+ * Copyright (c) 2005, Avalara.  All rights reserved .
  */
 public class Profile
 {
