@@ -27,6 +27,7 @@ public class CommitTaxRequest extends BaseRequest implements java.io.Serializabl
     private com.avalara.avatax.services.tax.DocumentType docType;
 
     private java.lang.String docCode;
+	private java.lang.String docId;
     private java.lang.String newDocCode;
 
     /**
@@ -51,7 +52,7 @@ public class CommitTaxRequest extends BaseRequest implements java.io.Serializabl
             java.lang.String newDocCode) {
         this.companyCode = companyCode;
         this.docType = docType;
-		this.docId = docType;
+		this.docId = docId;
         this.docCode = docCode;
         this.newDocCode = newDocCode;
     }

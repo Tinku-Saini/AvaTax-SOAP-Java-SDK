@@ -61,7 +61,7 @@ public class ApplyPaymentResult  extends com.avalara.avatax.services.tax.BaseRes
         if (__equalsCalc != null) {
             return (__equalsCalc == obj);
         }
-        __equalsCalc = obj 
+        __equalsCalc = obj;
         boolean _equals;
         _equals = super.equals(obj) &&
 		((this.docId==null && other.getDocId()==null) ||
@@ -92,6 +92,7 @@ public class ApplyPaymentResult  extends com.avalara.avatax.services.tax.BaseRes
 
     static {
         typeDesc.setXmlType(new javax.xml.namespace.QName("http://avatax.avalara.com/services", "ApplyPaymentResult"));
+        org.apache.axis.description.ElementDesc elemField = new org.apache.axis.description.ElementDesc();
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("docId");
         elemField.setXmlName(new javax.xml.namespace.QName("http://avatax.avalara.com/services", "DocId"));

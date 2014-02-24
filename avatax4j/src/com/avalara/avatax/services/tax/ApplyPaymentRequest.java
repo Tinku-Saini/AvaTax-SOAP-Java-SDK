@@ -103,8 +103,8 @@ public class ApplyPaymentRequest extends BaseRequest implements java.io.Serializ
      * 
      * @param docCode
      */
-    public void setDocCode(java.lang.String docCode) {
-        this.docCode = docCode;
+    public void setDocId(java.lang.String docId) {
+        this.docId = docId;
     }
 
 
@@ -165,9 +165,9 @@ public class ApplyPaymentRequest extends BaseRequest implements java.io.Serializ
             ((this.docType==null && other.getDocType()==null) || 
              (this.docType!=null &&
               this.docType.equals(other.getDocType()))) &&
-			((this.docCode==null && other.getDocCode()==null) || 
-             (this.docCode!=null &&
-              this.docCode.equals(other.getDocCode()))) &&
+			((this.docId==null && other.getDocId()==null) || 
+             (this.docId!=null &&
+              this.docId.equals(other.getDocId()))) &&
             ((this.docCode==null && other.getDocCode()==null) || 
              (this.docCode!=null &&
               this.docCode.equals(other.getDocCode()))) &&

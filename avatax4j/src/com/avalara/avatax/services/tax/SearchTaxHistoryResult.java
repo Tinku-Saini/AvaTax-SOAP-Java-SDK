@@ -33,8 +33,8 @@ public class SearchTaxHistoryResult  extends com.avalara.avatax.services.tax.Bas
      */
     public SearchTaxHistoryResult(
            com.avalara.avatax.services.tax.ArrayOfGetTaxResult getTaxResults,
-           java.lang.String lastDocCode),
-		   java.lang.String lastDocId{
+           java.lang.String lastDocCode,
+		   java.lang.String lastDocId){
            this.getTaxResults = getTaxResults;
            this.lastDocCode = lastDocCode;
 		   this.lastDocId = lastDocId;

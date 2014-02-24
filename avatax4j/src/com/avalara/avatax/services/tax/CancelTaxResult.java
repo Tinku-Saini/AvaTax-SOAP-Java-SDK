@@ -116,6 +116,7 @@ public class CancelTaxResult  extends com.avalara.avatax.services.tax.BaseResult
 
     static {
         typeDesc.setXmlType(new javax.xml.namespace.QName("http://avatax.avalara.com/services", "CancelTaxResult"));
+        org.apache.axis.description.ElementDesc elemField = new org.apache.axis.description.ElementDesc();
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("docId");
         elemField.setXmlName(new javax.xml.namespace.QName("http://avatax.avalara.com/services", "DocId"));

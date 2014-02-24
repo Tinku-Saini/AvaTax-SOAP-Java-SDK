@@ -122,7 +122,8 @@ public class PostTaxResult  extends com.avalara.avatax.services.tax.BaseResult  
 
     static {
         typeDesc.setXmlType(new javax.xml.namespace.QName("http://avatax.avalara.com/services", "PostTaxResult"));
-		elemField = new org.apache.axis.description.ElementDesc();
+        org.apache.axis.description.ElementDesc elemField = new org.apache.axis.description.ElementDesc();
+        elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("docId");
         elemField.setXmlName(new javax.xml.namespace.QName("http://avatax.avalara.com/services", "DocId"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
