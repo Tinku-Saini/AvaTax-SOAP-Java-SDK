@@ -26,6 +26,7 @@ public class ReconcileTaxHistoryRequest  implements java.io.Serializable {
 
     //New properties
     private DocumentType docType;
+	private java.lang.String lastDocId;
     private java.lang.String lastDocCode;
     private java.lang.Integer pageSize;
 
@@ -34,6 +35,7 @@ public class ReconcileTaxHistoryRequest  implements java.io.Serializable {
      */
     public ReconcileTaxHistoryRequest() {
        companyCode = "";
+	   lastDocId = "";
        lastDocCode = "";
        Calendar calendar= Calendar.getInstance();
        calendar.set(1900,01,01);
@@ -44,6 +46,7 @@ public class ReconcileTaxHistoryRequest  implements java.io.Serializable {
        endDate = calendar.getTime();
        docStatus = DocStatus.Any;
        docType = DocumentType.Any;
+	   lastDocId = "";
        lastDocCode = "";
        pageSize = 0;
 
@@ -171,6 +174,25 @@ public class ReconcileTaxHistoryRequest  implements java.io.Serializable {
     public void setDocType(com.avalara.avatax.services.tax.DocumentType docType) {
         this.docType = docType;
     }
+	
+	/**
+     * Gets the lastDocId value for this ReconcileTaxHistoryRequest.
+     *
+     * @return lastDocId
+     */
+    public java.lang.String getLastDocId() {
+        return lastDocId;
+    }
+
+
+    /**
+     * Sets the lastDocId value for this ReconcileTaxHistoryRequest.
+     *
+     * @param lastDocId
+     */
+    public void setLastDocId(java.lang.String lastDocId) {
+        this.lastDocId = lastDocId;
+    }
 
 
     /**
@@ -248,6 +270,9 @@ public class ReconcileTaxHistoryRequest  implements java.io.Serializable {
                 ((this.docType==null && other.getDocType()==null) ||
                         (this.docType!=null &&
                                 this.docType.equals(other.getDocType()))) &&
+				((this.lastDocId==null && other.getLastDocId()==null) ||
+                        (this.lastDocId!=null &&
+                                this.lastDocId.equals(other.getLastDocId()))) &&
                 ((this.lastDocCode==null && other.getLastDocCode()==null) ||
                         (this.lastDocCode!=null &&
                                 this.lastDocCode.equals(other.getLastDocCode()))) &&
@@ -288,6 +313,9 @@ public class ReconcileTaxHistoryRequest  implements java.io.Serializable {
         }
         if (getDocType() != null) {
             _hashCode += getDocType().hashCode();
+        }
+		if (getLastDocId() != null) {
+            _hashCode += getLastDocId().hashCode();
         }
         if (getLastDocCode() != null) {
             _hashCode += getLastDocCode().hashCode();
@@ -334,6 +362,13 @@ public class ReconcileTaxHistoryRequest  implements java.io.Serializable {
         elemField.setFieldName("docType");
         elemField.setXmlName(new javax.xml.namespace.QName("http://avatax.avalara.com/services", "DocumentType"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://avatax.avalara.com/services", "DocumentType"));
+        elemField.setMinOccurs(0);
+        elemField.setNillable(false);
+        typeDesc.addFieldDesc(elemField);
+		elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("lastDocId");
+        elemField.setXmlName(new javax.xml.namespace.QName("http://avatax.avalara.com/services", "LastDocId	"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
         elemField.setMinOccurs(0);
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
