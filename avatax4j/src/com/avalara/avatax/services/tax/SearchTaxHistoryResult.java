@@ -18,7 +18,7 @@ public class SearchTaxHistoryResult  extends com.avalara.avatax.services.tax.Bas
 
     private com.avalara.avatax.services.tax.ArrayOfGetTaxResult getTaxResults;
      private java.lang.String lastDocCode;
-    private java.lang.String lastDocId;
+    
 
     /**
      * Initializes a new instance of the class.
@@ -33,11 +33,9 @@ public class SearchTaxHistoryResult  extends com.avalara.avatax.services.tax.Bas
      */
     public SearchTaxHistoryResult(
            com.avalara.avatax.services.tax.ArrayOfGetTaxResult getTaxResults,
-           java.lang.String lastDocCode,
-		   java.lang.String lastDocId){
+           java.lang.String lastDocCode) {
            this.getTaxResults = getTaxResults;
            this.lastDocCode = lastDocCode;
-		   this.lastDocId = lastDocId;
     }
 
 
@@ -106,25 +104,6 @@ public class SearchTaxHistoryResult  extends com.avalara.avatax.services.tax.Bas
     public void setGetTaxResults(com.avalara.avatax.services.tax.ArrayOfGetTaxResult getTaxResults) {
         this.getTaxResults = getTaxResults;
     }
-	
-	/**
-     * Gets the lastDocId value for this SearchTaxHistoryResult.
-     *
-     * @return lastDocId
-     */
-    public java.lang.String getLastDocId() {
-        return lastDocId;
-    }
-
-
-    /**
-     * Sets the lastDocId value for this SearchTaxHistoryResult.
-     *
-     * @param lastDocId
-     */
-    public void setLastDocId(java.lang.String lastDocId) {
-        this.lastDocId = lastDocId;
-    }
 
     /**
      * Gets the lastDocCode value for this SearchTaxHistoryResult.
@@ -171,9 +150,6 @@ public class SearchTaxHistoryResult  extends com.avalara.avatax.services.tax.Bas
                 ((this.getTaxResults==null && other.getGetTaxResults()==null) ||
                         (this.getTaxResults!=null &&
                                 this.getTaxResults.equals(other.getGetTaxResults()))) &&
-				((this.lastDocId==null && other.getLastDocId()==null) ||
-             (this.lastDocId!=null &&
-              this.lastDocId.equals(other.getLastDocId()))) &&
                 ((this.lastDocCode==null && other.getLastDocCode()==null) ||
              (this.lastDocCode!=null &&
               this.lastDocCode.equals(other.getLastDocCode())));
@@ -203,9 +179,7 @@ public class SearchTaxHistoryResult  extends com.avalara.avatax.services.tax.Bas
         if (getLastDocCode() != null) {
             _hashCode += getLastDocCode().hashCode();
         }
-        if (getLastDocId() != null) {
-            _hashCode += getLastDocId().hashCode();
-        }
+       
         __hashCodeCalc = false;
         return _hashCode;
     }
@@ -230,13 +204,7 @@ public class SearchTaxHistoryResult  extends com.avalara.avatax.services.tax.Bas
         elemField.setMinOccurs(0);
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
-        elemField = new org.apache.axis.description.ElementDesc();
-        elemField.setFieldName("lastDocId");
-        elemField.setXmlName(new javax.xml.namespace.QName("http://avatax.avalara.com/services", "LastDocId"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
-        elemField.setMinOccurs(0);
-        elemField.setNillable(false);
-        typeDesc.addFieldDesc(elemField);
+        
     }
 
     /**
