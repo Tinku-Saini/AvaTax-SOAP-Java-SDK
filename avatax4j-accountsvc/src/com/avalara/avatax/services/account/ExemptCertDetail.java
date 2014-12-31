@@ -13,7 +13,7 @@ public class ExemptCertDetail  implements java.io.Serializable {
     private java.lang.String stateFips;
     private java.lang.String region;
     private java.lang.String idNo;
-     private java.util.Calendar endDate;
+     private java.util.Date endDate;
     private java.lang.String country;
     private java.lang.String idType;
 
@@ -25,7 +25,7 @@ public class ExemptCertDetail  implements java.io.Serializable {
            int exemptCertId,
            java.lang.String stateFips,
            java.lang.String region,
-           java.lang.String idNo,java.util.Calendar endDate,
+           java.lang.String idNo,java.util.Date endDate,
            java.lang.String country,
            java.lang.String idType) {
            this.exemptCertDetailId = exemptCertDetailId;
@@ -143,7 +143,7 @@ public class ExemptCertDetail  implements java.io.Serializable {
      *
      * @return endDate
      */
-    public java.util.Calendar getEndDate() {
+    public java.util.Date getEndDate() {
         return endDate;
     }
 
@@ -153,7 +153,7 @@ public class ExemptCertDetail  implements java.io.Serializable {
      *
      * @param endDate
      */
-    public void setEndDate(java.util.Calendar endDate) {
+    public void setEndDate(java.util.Date endDate) {
         this.endDate = endDate;
     }
 
@@ -306,7 +306,7 @@ public class ExemptCertDetail  implements java.io.Serializable {
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("endDate");
         elemField.setXmlName(new javax.xml.namespace.QName("http://avatax.avalara.com/services", "EndDate"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "dateTime"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "date"));
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();

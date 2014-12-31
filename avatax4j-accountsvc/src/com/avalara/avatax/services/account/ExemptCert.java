@@ -28,7 +28,7 @@ public class ExemptCert  implements java.io.Serializable {
     private java.lang.String businessTypeOtherDescription;
     private java.lang.String exemptReasonId;
     private java.lang.String exemptReasonOtherDescription;
-    private java.util.Calendar effDate;
+    private java.util.Date effDate;
     private java.lang.String regionsApplicable;
 
     private com.avalara.avatax.services.account.ExemptCertStatus exemptCertStatusId;
@@ -43,7 +43,7 @@ public class ExemptCert  implements java.io.Serializable {
     private java.lang.String statusDescription;
     private java.lang.String entityTypeDescription;
     private com.avalara.avatax.services.account.ArrayOfExemptCertDetail exemptCertDetails;
-    private java.util.Calendar expiryDate;
+    private java.util.Date expiryDate;
 
     private java.lang.String countryIssued;
     private java.lang.String avaCertId;
@@ -77,7 +77,7 @@ public class ExemptCert  implements java.io.Serializable {
            java.lang.String businessTypeOtherDescription,
            java.lang.String exemptReasonId,
            java.lang.String exemptReasonOtherDescription,
-           java.util.Calendar effDate,
+           java.util.Date effDate,
            java.lang.String regionsApplicable,
            boolean isEntity,
            com.avalara.avatax.services.account.ExemptCertStatus exemptCertStatusId,
@@ -95,7 +95,7 @@ public class ExemptCert  implements java.io.Serializable {
            java.lang.String countryIssued,
            java.lang.String avaCertId,
            com.avalara.avatax.services.account.ExemptCertReviewStatus exemptCertReviewStatusId,
-           java.util.Calendar expiryDate
+           java.util.Date expiryDate
            ) {
            this.exemptCertId = exemptCertId;
            this.companyId = companyId;
@@ -484,7 +484,7 @@ public class ExemptCert  implements java.io.Serializable {
      * 
      * @return effDate
      */
-    public java.util.Calendar getEffDate() {
+    public java.util.Date getEffDate() {
         return effDate;
     }
 
@@ -494,7 +494,7 @@ public class ExemptCert  implements java.io.Serializable {
      * 
      * @param effDate
      */
-    public void setEffDate(java.util.Calendar effDate) {
+    public void setEffDate(java.util.Date effDate) {
         this.effDate = effDate;
     }
 
@@ -826,7 +826,7 @@ public class ExemptCert  implements java.io.Serializable {
      * 
      * @return expiryDate
      */
-    public java.util.Calendar getExpiryDate() {
+    public java.util.Date getExpiryDate() {
         return expiryDate;
     }
 
@@ -836,7 +836,7 @@ public class ExemptCert  implements java.io.Serializable {
      * 
      * @param expiryDate
      */
-    public void setExpiryDate(java.util.Calendar expiryDate) {
+    public void setExpiryDate(java.util.Date expiryDate) {
         this.expiryDate = expiryDate;
     }
 
@@ -1192,7 +1192,7 @@ public class ExemptCert  implements java.io.Serializable {
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("effDate");
         elemField.setXmlName(new javax.xml.namespace.QName("http://avatax.avalara.com/services", "EffDate"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "dateTime"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "date"));
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
