@@ -1,0 +1,789 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>AvaTax4J Read Me</title>
+<LINK REL ="stylesheet" TYPE="text/css" HREF="doc/api/stylesheet.css" TITLE="Style">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+
+<body style="margin-top:0">
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+	<TR>
+	<TD COLSPAN=3 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+		<h1>AvaTax4J Readme</h1>
+	</TD>
+</TR>
+</TABLE>
+<p>This is a Java client adapter for Avalara AvaTax web services.  This version has support for the tax and 
+address services.</p>
+<p>The adapter was built using Apache Axis WSDL2Java to build the stubs which 
+  were then enhanced to support a custom Profile SOAP header element and a WS-Security 
+  UsernameToken SOAP header element.</p>
+<p>A set of JUnit tests are provided as examples. You may wish to refer to .NET/COM 
+  documentation for more details.</p>
+<p><strong>YOU MUST CONFIGURE avatax4j.properties before running tests or samples!</strong><br>
+  Use avatax4j.properties.sample as an example and insert your account and license.</p>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+  <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor"> 
+    <TD COLSPAN=2><FONT SIZE="+2"> <B>Contents</B></FONT></TD>
+  </TR>
+  <TR BGCOLOR="white" CLASS="TableRowColor"> 
+    <TD WIDTH="20%">/doc/api</TD>
+    <TD><a href="doc/api/index.html">Javadocs - API Documentation</a></TD>
+  </TR>
+  <TR BGCOLOR="white" CLASS="TableRowColor"> 
+    <TD>/lib</TD>
+    <TD>All required jars</TD>
+  </TR>
+  <TR BGCOLOR="white" CLASS="TableRowColor"> 
+    <TD>/samples</TD>
+    <TD><p>Sample applications</p>
+      <ul>
+        <li>AddressValidateSample</li>
+        <li>TaxTransactionSample</li>
+        <li>TestConnectionSample</li>
+      </ul></TD>
+  </TR>
+  <TR BGCOLOR="white" CLASS="TableRowColor"> 
+    <TD>/src</TD>
+    <TD>Full source code</TD>
+  </TR>
+  <TR BGCOLOR="white" CLASS="TableRowColor"> 
+    <TD>/test</TD>
+    <TD>TaxSvcTest JUnit test class to be used as an initial example.</TD>
+  </TR>
+  <TR BGCOLOR="white" CLASS="TableRowColor"> 
+    <TD>avatax4j.properties.sample</TD>
+    <TD>Sample properties file for JUnit tests to configure url, account, license<br>
+      This must be renamed to avatax4.properties and configured prior to running 
+      the unit tests.</TD>
+  </TR>
+  <TR BGCOLOR="white" CLASS="TableRowColor"> 
+    <TD>build.xml</TD>
+    <TD>Ant build script. Run &quot;ant&quot; for usage instructions</TD>
+  </TR>
+</TABLE>
+
+<h2>Dependencies</h2>
+<p>All dependent jar files are included for build and running.</p>
+<ul>
+  <li><a href="http://java.sun.com/javase/downloads/index_jdk5.jsp" target="_blank"> 
+    JDK 5.0</a> or later 
+    <ul>
+      <li>avatax4j should be compatible with <a href="http://java.sun.com/j2se/1.4.2/download.html" target="_blank">J2SDK 
+        1.4.2</a> , but we no longer provide support for this version. You will 
+        need to use the cacert file from JDK 5.0.</li>
+    </ul>
+  </li>
+  <li><a href="http://ant.apache.org/bindownload.cgi" target="_blank">Apache Ant 
+    1.6.x</a> or later</li>
+</ul>
+<h2>Getting Started</h2>
+<ol>
+  <li>Look at the examples in the samples directory.</li>
+  <li>Look at the unit tests for more examples.</li>
+  <li>Read the <a href="doc/api/index.html">Javadocs</a></li>
+  <li>Configure avatax4j.properties.Use avatax4j.properties.sample as an example 
+    and insert your account and license.</li>
+  <li>Run the samples and unit tests. See build instructions below.</li>
+</ol>
+<h2>Build Instructions</h2>
+<p>A complete Ant build.xml script is provided in the root directory. Here is 
+  a list of the main target Ant tasks.</p>
+<ul>
+  <li>compile - compiles everything</li>
+  <li>javadoc - builds the javadocs</li>
+  <li>test - runs the junit tests</li>
+  <li>clean - cleans up all generated files and directories</li>
+  <li>jar - creates the avatax4j.jar file</li>
+  <li>usage - provides help on using the build tool (default)</li>
+</ul>
+<h2>Deployment</h2>
+<p>Many applications will only need to deploy the avatax4j.jar and avatax4j.properties 
+  file. The avatax4j.properties file can be eliminated by setting the server url, 
+  username and password credentials in your code. Examples of this can be found 
+  in any of the samples (e.g. TestConnectionSample).</p>
+<p>Some applications may require deployment of additional jar files from the lib 
+  folder. These are all standard Sun, Apache, or other open-source components. 
+  The version is indicated in most of the jar file names, but avatax4j should 
+  be generally compatible with later versions. The axis-ant.jar, junit.jar, wsdl4j.jar 
+  are only used for building and testing avatax4j.</p>
+<h2>Important Notice</h2>
+<p>The changes in this release are primarily to support our upcoming high-availability 
+  initiative (AvaTax 6.0) which will provide multiple live AvaTax sites, called 
+  Tax Calculation Centers or TCCs.&nbsp; This new release eliminates the DocId 
+  property for all operations.&nbsp; Instead, clients will need to use DocCode 
+  instead of DocId.&nbsp; DocCode is specified by the client and typically represents 
+  an order or invoice number. Site specific DocIds are not compatible with a multi-site, 
+  highly-available architecture. We will maintain support for clients using earlier 
+  adapters, but they will not be able to take advantage of the new high-availability 
+  architecture. If you are developing a new client, then these changes do not 
+  affect you.</p>
+<h2>Change History</h2>
+<h4>11.4</h4>
+<p>In this release we have exposed the ability to specify a latitude and longitude as part of the address.</p>
+<p><b>Address class</b><ol>
+<li>	<font face="Courier New, Courier, mono">latitude</font>&nbsp;(String)&nbsp; has been added as a part of Address , also provided the get and set method for it</li>
+<li>	<font face="Courier New, Courier, mono">longitude</font>&nbsp;(String)&nbsp; has been added as a part of Address , also provided the get and set method for it</li>
+</ol>
+<p><b>BaseAddress class</b><br>
+<b>package</b>: com.avalara.avatax.services.tax
+<ol>
+<li>	<font face="Courier New, Courier, mono">latitude</font>&nbsp;(String)&nbsp; has been added as a part of BaseAddress , also provided the get and set method for it</li>
+<li>	<font face="Courier New, Courier, mono">longitude</font>&nbsp;(String)&nbsp; has been added as a part of BaseAddress , also provided the get and set method for it</li>
+</ol>
+
+</p>
+
+<h4>11.2</h4>
+<p>This release adds new Service AvaCert2.</p><blockquote><p><b>General</b><ul> <li>Added new Service AvaCert2 to add exempt customers, certificate request initiate, certificate request get, certificate get, and certificate image get.</li></ul></p></blockquote> 
+<blockquote><p><b>AvaCert2Svc</b>
+<ol start="1" type="1">	
+<br>	<li><b>CustomerSaveRequest class </b> 
+	
+		<ul> <li><font face="Courier New, Courier, mono">Customer </font> has been added. The customer data to add.</li></ul></li>
+<br>	<li><b>CustomerSaveResult class </b> 
+<br>	<li><b>CertificateRequestInitiateRequest class </b> 
+	
+		<ul> <li>	<font face="Courier New, Courier, mono">CompanyCode</font> has been added. CompanyCode for the customer.</li></ul> 
+		<ul> <li>	<font face="Courier New, Courier, mono">CustomerCode</font> has been added. CustomerCode indicates the customer identification code from client system.</li></ul> 
+		<ul> <li>	<font face="Courier New, Courier, mono">CommunicationMode</font> has been added. CommunicationMode indicates the mode to use for communicating with the customer like Email, Mail, or Fax. </li></ul>
+		<ul> <li>	<font face="Courier New, Courier, mono">SourceLocationCode</font> has been added. SourceLocationCode is the Source LocationCode for the request. If provided; the code must be one that exists for the Company. </li></ul>
+		<ul> <li>	<font face="Courier New, Courier, mono">RequestType</font> has been added. RequestType indicates the type of the request to be initiated. </li></ul>
+		<ul> <li>	<font face="Courier New, Courier, mono">CustomMessage</font> has been added. Custom message to be used for the request. </li></ul>
+		<ul> <li> <font face="Courier New, Courier, mono">LetterTemplate</font> has been added. The name of the Letter Template to use for the correspondence. </li></ul>
+		<ul> <li> <font face="Courier New, Courier, mono">IncludeCoverPage</font> has been added. Whether or not a fax cover sheet with a barcode will be attached to the correspondence. If null, the default is used (false). </li></ul>
+		<ul> <li>	<font face="Courier New, Courier, mono">CloseReason</font> has been added. Reason for closing the Request.</li></ul> 
+		<ul> <li>	<font face="Courier New, Courier, mono">RequestId</font> has been added. Unique identifier for the Request record. </li></ul></li>
+
+<br>	<li><b>CertificateRequestInitiateResult class </b> 
+	
+		<ul> <li>	<font face="Courier New, Courier, mono">TrackingCode </font>has been added. TrackingCode indicates the unique Tracking Code of the Request. </li></ul>
+		<ul> <li>	<font face="Courier New, Courier, mono">WizardLaunchUrl </font>has been added. WizardLaunchUrl indicates the unique tracking Url for the Request, that is used to launch the wizard. </li></ul>
+		<ul> <li>	<font face="Courier New, Courier, mono">RequestId </font>has been added. Unique identifier for the Request record. </li></ul>
+		<ul> <li>	<font face="Courier New, Courier, mono">CustomerCode </font>has been added. Customer identification code from client system. </li></ul></li>
+
+<br>	<li><b>CertificateGetRequest class </b>
+	 	
+			<ul> <li>	<font face="Courier New, Courier, mono">CompanyCode</font> has been added. The ComapnyCode associated with a certificate record. </li></ul>
+			<ul> <li>	<font face="Courier New, Courier, mono">CustomerCode </font>has been added. The CustomerCode associated with a certificate record. </li></ul>
+			<ul> <li>	<font face="Courier New, Courier, mono">ModFromDate</font> has been added. The ModFromDate indicates the date from which the certificates needs to be fetched. </li></ul>
+			<ul> <li>	<font face="Courier New, Courier, mono">ModToDate</font> has been added. The ModToDate indicates the date from which the certificates needs to be fetched. </li></ul></li>
+
+<br>	<li><b>CertificateGetResult class </b>	
+	     <ul> <li>	<font face="Courier New, Courier, mono"> Certificates </font> has been added. The Certificates contains collection of exemption certificate records. </li></ul></li>
+
+<br>	<li><b>CertificateRequestGetRequest class </b>		
+	
+			<ul> <li>	<font face="Courier New, Courier, mono">CompanyCode </font>has been added. The ComapnyCode associated with a certificate record.</li></ul> 
+			<ul> <li>	<font face="Courier New, Courier, mono">CustomerCode </font>has been added. The CustomerCode associated with a certificate record.</li></ul> 
+			<ul> <li>	<font face="Courier New, Courier, mono">RequestStatus </font>has been added. Current status of the Request. </li></ul>
+			<ul> <li>	<font face="Courier New, Courier, mono">ModFromDate </font>has been added. The ModFromDate indicates the date from which the certificates needs to be fetched. </li></ul>
+			<ul> <li>	<font face="Courier New, Courier, mono">ModToDate </font>has been added. The ModToDate indicates the date from which the certificates needs to be fetched. </li></ul></li>
+
+<br>	<li><b>CertificateRequestGetResult class </b>			
+	
+			<ul> <li>	<font face="Courier New, Courier, mono">CertificateRequests </font> has been added. The CertificateRequests contains collection of certificate request records</li></ul></li>
+	
+<br>	<li><b>CertificateImageGetRequest class</b>		
+	    <ul> <li>	<font face="Courier New, Courier, mono">CompanyCode </font>has been added. The ComapnyCode associated with a certificate record. </li></ul> 
+			<ul> <li>	<font face="Courier New, Courier, mono">AvaCertId </font>has been added. Unique identifier for the Certificate record. </li></ul> 
+			<ul> <li>	<font face="Courier New, Courier, mono">Format </font>has been added. Format in which the image needs to be exported. </li></ul> 
+			<ul> <li>	<font face="Courier New, Courier, mono">PageNumber </font>has been added. Page number of of the certificate image. </li></ul> </li>
+
+<br>	<li><b>CertificateImageGetResult class</b>			
+	
+			 <ul> <li>	<font face="Courier New, Courier, mono">AvaCertId </font>has been added. Unique identifier for the Certificate record. </li></ul> 
+			 <ul> <li>	<font face="Courier New, Courier, mono">Image </font>has been added. Image is the Certificate image.</li></ul>  </li>
+			 	
+<br>	<li><b>Customer class</b>			
+			 <ul> <li>	<font face="Courier New, Courier, mono">CustomerCode</font> has been added. CustomerCode indicates the customer identification code from client system. </li></ul> 
+			 <ul> <li>	<font face="Courier New, Courier, mono">NewCustomerCode </font>has been added. NewCustomerCode is used for changing the CustomerCode. </li></ul> 
+			 <ul> <li>	<font face="Courier New, Courier, mono">ParentCustomerCode </font>has been added. ParentCustomerCode is unique identifier for the parent customer record.</li></ul>  
+			 <ul> <li>	<font face="Courier New, Courier, mono">Type </font>has been added. Type indicates the customer type code. </li></ul> 
+			 <ul> <li>	<font face="Courier New, Courier, mono">BusinessName</font> has been added. BusinessName indicates the business or organization name. </li></ul> 
+			 <ul> <li>	<font face="Courier New, Courier, mono">Attn </font>has been added. Attn indicates the name of the person to use in correspondence for the Customer record.. </li></ul> 
+			 <ul> <li>	<font face="Courier New, Courier, mono">Address1 </font>has been added. Address1 is the Address line 1 . </li></ul> 
+			 <ul> <li>	<font face="Courier New, Courier, mono">Address2</font> has been added. Address2 is the Address line 2 . </li></ul> 
+			 <ul> <li>	<font face="Courier New, Courier, mono">City </font>has been added. City name. </li></ul> 
+			 <ul> <li>	<font face="Courier New, Courier, mono">State </font>has been added. State indicates the state or province name. </li></ul> 
+			 <ul> <li>	<font face="Courier New, Courier, mono">Country</font> has been added. Country is the ISO 2-character country code. </li></ul> 
+			 <ul> <li>	<font face="Courier New, Courier, mono">Zip </font>has been added. Zip is the ZIP or postal code. </li></ul> 
+			 <ul> <li>	<font face="Courier New, Courier, mono">Phone</font> has been added. Phone number. </li></ul>
+			 <ul> <li>	<font face="Courier New, Courier, mono">Fax </font>has been added. Fax number. </li></ul>
+			 <ul> <li>	<font face="Courier New, Courier, mono">Email </font>has been added. Email address. </li></ul> </li>
+
+	
+<br>	<li><b>Certificate class</b>	
+	
+		 <ul> <li>	<font face="Courier New, Courier, mono">	AvaCertId </font>has been added. The AvaCertId is the unique identifier for the Certificate record. </li></ul>
+		 <ul> <li>	<font face="Courier New, Courier, mono">	CertificateJurisdictions </font>has been added. The CertificateJurisdictions contains the details of Certificate Jurisdiction. </li></ul>
+		 <ul> <li>	<font face="Courier New, Courier, mono">	CustomerCodes </font>has been added. The CustomerCodes for the customer associated with the Certificate record. </li></ul>
+		 <ul> <li>	<font face="Courier New, Courier, mono">	CustomerType </font>has been added. The CustomerType of the customer associated with the Certificate record. </li></ul>
+		 <ul> <li>	<font face="Courier New, Courier, mono">	SourceLocationName </font>has been added. The SourceLocationName is the source location display name for the Certificate record (the client location responsible for tracking the certificate). </li></ul>
+		 <ul> <li>	<font face="Courier New, Courier, mono">	SourceLocationCode</font> has been added. The SourceLocationCode is the source location code for the Certificate record (the client location responsible for tracking the certificate). </li></ul>
+		 <ul> <li>	<font face="Courier New, Courier, mono">	CertificateStatus</font> has been added. The CertificateStatus is the status for the Certificate record. </li></ul>
+		 <ul> <li>	<font face="Courier New, Courier, mono">	ReviewStatus </font>has been added. The ReviewStatus is the review status for the Certificate record. </li></ul>
+		 <ul> <li>	<font face="Courier New, Courier, mono">	RejectionReasonCode </font>has been added. Reason for rejection of a certificate when ReviewStatus of the Certificate record is REJECTED. </li></ul>
+		 <ul> <li>	<font face="Courier New, Courier, mono">	RejectionReasonDetailCode</font> has been added. Details about the reason for rejection of a certificate when ReviewStatus of the Certificate record is REJECTED.</li></ul> 
+		 <ul> <li>	<font face="Courier New, Courier, mono">	RejectionReasonCustomText </font>has been added. Custom Reason or details about a reason for rejection of a certificate provided by the user when ReviewStatus of the Certificate record is REJECTED.</li></ul> 
+		 <ul> <li>	<font face="Courier New, Courier, mono">	CreatedDate</font> has been added. The CreatedDate is the creation date of the Certificate record. </li></ul>
+		 <ul> <li>	<font face="Courier New, Courier, mono">	LastModifiedDate </font>has been added. The LastModifiedDate is the last modified date of the Certificate record. </li></ul>
+		 <ul> <li>	<font face="Courier New, Courier, mono">	DocReceivedDate</font> has been added. The DocReceivedDate is the received date of the Certificate record. </li></ul>
+		 <ul> <li>	<font face="Courier New, Courier, mono">	BusinessName </font>has been added. The BusinessName is the business name of the Certificate record. </li></ul>
+		 <ul> <li>	<font face="Courier New, Courier, mono">	Address1 </font>has been added. Address1 is the address1 field for the Certificate record. </li></ul>
+		 <ul> <li>	<font face="Courier New, Courier, mono">	Address2 </font>has been added. Address2 is the address2 field for the Certificate record. </li></ul>
+		 <ul> <li>	<font face="Courier New, Courier, mono">	City </font>has been added. City is the exempt customer city address field for the Certificate record. </li></ul>
+		 <ul> <li>	<font face="Courier New, Courier, mono">	State </font>has been added. State is the exempt customer region address field for the Certificate record. </li></ul>
+		 <ul> <li>	<font face="Courier New, Courier, mono">	Country </font>has been added. Country is the exempt customer country address field for the Certificate record. </li></ul>
+		 <ul> <li>	<font face="Courier New, Courier, mono">	Zip </font>has been added. Zip is the US zip or zip+4 code (or CA postal code) address field for the Certificate record. </li></ul>
+		 <ul> <li>	<font face="Courier New, Courier, mono">	Phone </font>has been added. Phone number field for the Certificate record. </li></ul>
+		 <ul> <li>	<font face="Courier New, Courier, mono">	Email </font>has been added. Email address field for the Certificate record. </li></ul>
+		 <ul> <li>	<font face="Courier New, Courier, mono">	SignerName </font>has been added. SignerName is the exempt customer signer name field for the Certificate record. </li></ul>
+		 <ul> <li>	<font face="Courier New, Courier, mono">	SignerTitle </font>has been added. SignerTitle is the exempt customer signer title field for the Certificate record. </li></ul>
+		 <ul> <li>	<font face="Courier New, Courier, mono">	SignedDate </font>has been added. SignedDate is the effective date (or the actual signature date) of the Certificate record. </li></ul>
+		 <ul> <li>	<font face="Courier New, Courier, mono">	BusinessDescription </font>has been added. BusinessDescription is the exempt customer business description field for the Certificate record. </li></ul>
+		 <ul> <li>	<font face="Courier New, Courier, mono">	SellerPropertyDescription</font> has been added. SellerPropertyDescription is the seller property description the exempt customer selected for the Certificate record. </li></ul>
+		 <ul> <li>	<font face="Courier New, Courier, mono">	CertificateUsage </font>has been added. CertificateUsage is the usage type for the Certificate record. </li></ul>
+		 <ul> <li>	<font face="Courier New, Courier, mono">	PartialExemption </font>has been added. PartialExemption indicates whether the Certificate record is considered "partially exempt". </li></ul>
+		 <ul> <li>	<font face="Courier New, Courier, mono">	ExemptReasonCode </font>has been added. ExemptReasonCode is the client-specified exemption reason code for the Certificate record. </li></ul>
+		 <ul> <li>	<font face="Courier New, Courier, mono">	ExemptFormName </font>has been added. ExemptFormName is the name of the state-issued form for the Certificate record; either a system-defined code name or a client-specified custom name. </li></ul>
+		 <ul> <li>	<font face="Courier New, Courier, mono">	Custom1 </font>has been added. Custom1 is the client-specified value for custom Certificate field 1. </li></ul>
+		 <ul> <li>	<font face="Courier New, Courier, mono">	Custom2 </font>has been added. Custom2 is the client-specified value for custom Certificate field 2. </li></ul>
+		 <ul> <li>	<font face="Courier New, Courier, mono">	Custom3 </font>has been added. Custom3 is the client-specified value for custom Certificate field 3. </li></ul>
+		 <ul> <li>	<font face="Courier New, Courier, mono">	PageCount </font>has been added. Number of pages in the Certificate record. </li></ul></li>
+	
+<br>	<li><b>RequestType enum</b>		
+	
+				<ul> <li>	Created new enum type called <font face="Courier New, Courier, mono">STANDARD </font>which sends correspondences and follow ups related to this Request to the associated Customer. </li></ul>
+				<ul> <li>	Created new enum type called <font face="Courier New, Courier, mono">DIRECT </font>which does not send any correspondence or follow ups related to this Request to the associated Customer. </li></ul></li>
+					
+<br>	<li><b>FormatType enum</b>		
+	      	<ul> <li>	Created new enum type called <font face="Courier New, Courier, mono">NULL  </font> which is a NULL(value not set) value (default value). </li></ul> 
+				<ul> <li>	Created new enum type called <font face="Courier New, Courier, mono">PNG  </font> which is a bitmapped binary image in the 1-bit PNG format . </li></ul>
+				<ul> <li>	Created new enum type called <font face="Courier New, Courier, mono">PDF  </font>which is a document in Portable document format with images of every page in the certificate. </li></ul></li>
+
+<br>	<li><b>CertificateStatus enum</b>	
+			
+				<ul> <li>	Created new enum type called <font face="Courier New, Courier, mono">ACTIVE</font> which is active with images received. </li></ul>
+				<ul> <li>	Created new enum type called <font face="Courier New, Courier, mono">VOID</font> which has been voided from active use. </li></ul>
+				<ul> <li>	Created new enum type called <font face="Courier New, Courier, mono">INCOMPLETE</font> which does not yet have all of its images received. </li></ul></li>
+
+<br>	<li><b>CertificateReviewStatus enum</b>		
+				<ul> <li>Created new enum type called <font face="Courier New, Courier, mono">PENDING</font> which has not yet been reviewed.</li></ul> 
+				<ul> <li>Created new enum type called <font face="Courier New, Courier, mono">ACCEPTED</font> which was accepted during review. </li></ul>
+				<ul> <li>Created new enum type called <font face="Courier New, Courier, mono">REJECTED</font> which was rejected during review. </li></ul></li>
+					
+<br>	<li><b>CertificateRequestStatus enum</b>		
+		 	<ul> <li>Created new enum type called  <font face="Courier New, Courier, mono">ALL</font> which is of any status. </li></ul> 
+			<ul> <li>	Created new enum type called  <font face="Courier New, Courier, mono">OPEN </font>which has been initiated and is currently open. </li></ul> 
+			<ul> <li>	Created new enum type called  <font face="Courier New, Courier, mono">CLOSED </font>which has been closed, either manually or automatically. </li></ul></li>
+				
+				
+<br>	<li><b>CertificateRequestStage enum</b>
+			<ul> <li>Created new enum type called <font face="Courier New, Courier, mono">REQUESTINITIATED</font>  which indicates request has been initiated; correspondence has been sent to the associated Customer.</li></ul>  
+			<ul> <li>Created new enum type called <font face="Courier New, Courier, mono">CUSTOMERRESPONDED</font>  which indicates customer has responded to the correspondence. </li></ul> 
+			<ul> <li>Created new enum type called <font face="Courier New, Courier, mono">CERTIFICATERECEIVED</font>  which indicates customer has provided a Certificate. </li></ul></li>
+
+<br>	<li><b>CertificateUsage enum</b>	
+			
+			<ul> <li>Created new enum type called <font face="Courier New, Courier, mono">BLANKET</font> which indicates the certificate may be used multiple times. </li></ul>
+			<ul> <li>Created new enum type called <font face="Courier New, Courier, mono">SINGLE </font>which indicates the certificate may only be used for a single transaction. </li></ul>
+			<ul> <li>Created new enum type called <font face="Courier New, Courier, mono">NULL</font> which indicates value has not been set. </li></ul></li>
+				
+<br>	<li><b>CommunicationMode enum</b>	
+			
+			<ul> <li>Created new enum type called <font face="Courier New, Courier, mono"> NULL </font>which is no value has been set. </li></ul>
+			<ul> <li>Created new enum type called <font face="Courier New, Courier, mono"> EMAIL </font>which is Email address.</li></ul> 
+			<ul> <li>Created new enum type called <font face="Courier New, Courier, mono"> MAIL </font>which is Mail address. </li></ul>
+			<ul> <li>Created new enum type called <font face="Courier New, Courier, mono"> FAX  </font>which is Fax number. </li></ul></li>
+
+</ol>
+
+</blockquote>	
+</p>	
+	
+<h4>5.10.0</h4>
+<p>This release adds New Request Type (DIRECT) to InitiateExemptionCertificate where wizard will get launched to initiate certificate . This release also contains operations to get Exemption Certificate.</p><blockquote><p><b>General</b><ul> <li>Added new GetExemptionCertificates AvaCert method that will obtain all certificates from vCert for a customer.</li></ul></p></blockquote>
+
+<blockquote><p><b>AvaCertSvc</b>
+
+	<ol start="1" type="1">
+
+			
+			
+			
+<br>	<li><b>InitiateExemptCertRequest class</b> <ul> <li><font face="Courier New, Courier, mono">RequestType</font> has been added. The <font face="Courier New, Courier, mono">RequestType</font> indicates the type of the request to be initiated.</li></ul></li>
+
+<br>	<li><b>InitiateExemptCertResult class </b> <ul> <li><font face="Courier New, Courier, mono">WizardLaunchUrl</font> has been added. The<font face="Courier New, Courier, mono"> WizardLaunchUrl</font> is an unique tracking Url for the Request, that is used to launch the wizard</li></ul></li>	
+
+<br>	<li><b>GetExemptionCertificatesRequest class</b> <ul> 
+			<li><font face="Courier New, Courier, mono">CompanyCode </font> has been added. The <font face="Courier New, Courier, mono">ComapnyCode</font> associated with a certificate record.</li>
+			<li><font face="Courier New, Courier, mono">CustomerCode </font> has been added. The <font face="Courier New, Courier, mono">CustomerCode</font> associated with a certificate record.</li>
+			<li><font face="Courier New, Courier, mono">FromDate</font> has been added. The <font face="Courier New, Courier, mono">FromDate</font> indicates the date from which the certificates needs to be fetched.</li>
+			<li><font face="Courier New, Courier, mono">ToDate</font> has been added. The <font face="Courier New, Courier, mono">ToDate</font> indicates the date from which the certificates needs to be fetched.</li>
+			<li><font face="Courier New, Courier, mono">Region</font> has been added. The <font face="Courier New, Courier, mono">Region</font> associated with a certificate record.</li>
+	</ul></li>
+	
+<br>	<li><b>GetExemptionCertificatesResult class</b> <ul> 
+			<li><font face="Courier New, Courier, mono">ArrayOfExemptionCertificate </font> has been added. The <font face="Courier New, Courier, mono">ArrayOfExemptionCertificate</font> contains collection of exemption certificate records.</li>
+			<li><font face="Courier New, Courier, mono">RecordCount</font> has been added. The <font face="Courier New, Courier, mono">RecordCount</font> indicates the total number of exemption certificates returned. </li>
+	</ul></li>
+<br>	<li><b>ExemptionCertificate class</b> <ul> 
+			<li><font face="Courier New, Courier, mono">AvaCertId</font> has been added. The <font face="Courier New, Courier, mono">AvaCertId</font> is the unique identifier for the Certificate record.</li>
+			<li><font face="Courier New, Courier, mono">Jurisdictions</font> has been added. The <font face="Courier New, Courier, mono">Jurisdictions</font> contains the details of Jurisdiction.</li>
+			<li><font face="Courier New, Courier, mono">CustomerCodes</font> has been added. The <font face="Courier New, Courier, mono">CustomerCodes</font> for the customer associated with the Certificate record.</li>
+			<li><font face="Courier New, Courier, mono">CustomerType</font> has been added. The <font face="Courier New, Courier, mono">CustomerType</font> of the customer associated with the Certificate record.</li>
+			<li><font face="Courier New, Courier, mono">LocationName</font> has been added. The <font face="Courier New, Courier, mono">LocationName</font> is the source location display name for the Certificate record (the client location responsible for tracking the certificate).</li>
+			<li><font face="Courier New, Courier, mono">LocationCode</font> has been added. The <font face="Courier New, Courier, mono">LocationCode</font> is the source location code for the Certificate record (the client location responsible for tracking the certificate). 
+ </li>
+			<li><font face="Courier New, Courier, mono">CertificateStatus</font> has been added. The <font face="Courier New, Courier, mono">CertificateStatus</font> is the status for the Certificate record. </li>
+			<li><font face="Courier New, Courier, mono">ReviewStatus</font> has been added. The <font face="Courier New, Courier, mono">ReviewStatus</font> is the review status for the Certificate record. 
+ </li>
+			<li><font face="Courier New, Courier, mono">CreatedDate</font> has been added. The<font face="Courier New, Courier, mono"> CreatedDate </font> is the creation date of the Certificate record. 
+ </li>
+			<li><font face="Courier New, Courier, mono">ModifiedDate </font> has been added. The <font face="Courier New, Courier, mono">ModifiedDate </font> is the last modified date of the Certificate record. 
+ </li>
+			<li><font face="Courier New, Courier, mono">ReceivedDate </font> has been added. The <font face="Courier New, Courier, mono">ReceivedDate</font> is the received date of the Certificate record. </li>
+			<li><font face="Courier New, Courier, mono">BusinessName</font> has been added. The <font face="Courier New, Courier, mono">BusinessName</font> is the business name of the Certificate record. </li>
+			<li><font face="Courier New, Courier, mono">Address1</font> has been added. <font face="Courier New, Courier, mono">Address1</font> is the address1 field for the Certificate record. </li>
+			<li><font face="Courier New, Courier, mono">Address2</font> has been added. <font face="Courier New, Courier, mono">Address2 </font>is the address2 field for the Certificate record. </li>
+			<li><font face="Courier New, Courier, mono">City</font> has been added. <font face="Courier New, Courier, mono">City</font> is the exempt customer city address field for the Certificate record. </li>
+			<li><font face="Courier New, Courier, mono">Region</font> has been added. <font face="Courier New, Courier, mono">Region</font> is the exempt customer region address field for the Certificate record. </li>
+			<li><font face="Courier New, Courier, mono">Country</font> has been added. <font face="Courier New, Courier, mono">Country</font> is the exempt customer country address field for the Certificate record. </li>
+			<li><font face="Courier New, Courier, mono">PostalCode</font> has been added. <font face="Courier New, Courier, mono">PostalCode</font> is the US zip or zip+4 code (or CA postal code) address field for the Certificate record. </li>
+			<li><font face="Courier New, Courier, mono">Phone</font> has been added. Phone number field for the Certificate record. </li>
+			<li><font face="Courier New, Courier, mono">Email</font> has been added. Email address field for the Certificate record. </li>
+			<li><font face="Courier New, Courier, mono">SignerName </font>has been added. SignerName is the exempt customer signer name field for the Certificate record. </li>
+			<li><font face="Courier New, Courier, mono">SignerTitle</font> has been added. SignerTitle is the exempt customer signer title field for the Certificate record. </li>
+			<li><font face="Courier New, Courier, mono">SignedDate </font>has been added. SignedDate is the effective date (or the actual signature date) of the Certificate record. </li>
+			<li><font face="Courier New, Courier, mono">BusinessDescription</font> has been added. BusinessDescription is the exempt customer business description field for the Certificate record. </li>
+			<li><font face="Courier New, Courier, mono">SellerPropertyDescription</font> has been added. SellerPropertyDescription is the seller property description the exempt customer selected for the Certificate record. 
+ </li>
+			<li><font face="Courier New, Courier, mono">CertificateUsage</font> has been added. CertificateUsage is the usage type for the Certificate record. </li>
+			<li><font face="Courier New, Courier, mono">IsPartialExemption</font> has been added. IsPartialExemption indicates whether the Certificate record is considered "partially exempt". 
+ </li>
+			<li><font face="Courier New, Courier, mono">ExemptReasonCode</font> has been added. ExemptReasonCode is the client-specified exemption reason code for the Certificate record. 
+ </li>
+			<li><font face="Courier New, Courier, mono">ExemptFormName</font> has been added. ExemptFormName is the name of the state-issued form for the Certificate record; either a system-defined code name or a client-specified custom name. </li>
+			<li><font face="Courier New, Courier, mono">Custom1</font> has been added. Custom1 is the client-specified value for custom Certificate field 1. 
+ </li>
+			<li><font face="Courier New, Courier, mono">Custom2</font> has been added. Custom2 is the client-specified value for custom Certificate field 2. </li>
+			
+			<li><font face="Courier New, Courier, mono">Custom3</font> has been added. Custom3 is the client-specified value for custom Certificate field 3. </li>
+
+	</ul></li>
+
+<br>	<li><b>Jurisdiction class</b> <ul> 
+	<li><font face="Courier New, Courier, mono">JurisdictionCode </font> has been added. The JurisdictionCode for the Jurisdiction record. 
+ </li>
+	<li><font face="Courier New, Courier, mono">Country </font> has been added. The Country code for the Jurisdiction record (ISO-3166-1-alpha-2 Country Code). </li>
+	<li><font face="Courier New, Courier, mono">ExpiryDate </font>has been added. The Expiry Date is an expiration date for the Jurisdiction record.. 
+ </li>
+	<li><font face="Courier New, Courier, mono">DoesNotExpire</font> has been added. The DoesNotExpire indicates whether the Jurisdiction can expire. 
+ </li>
+	<li><font face="Courier New, Courier, mono">PermitNumbers</font> has been added. The PermitNumbers are the exempt customer permit number(s) for the Jurisdiction record. </li>			
+	</ul></li>
+
+<br><li><b> RequestType enum
+</b> <ul> 
+	<li>Created new enum type called <font face="Courier New, Courier, mono">STANDARD </font>which sends correspondences and follow ups related to this Request to the associated Customer. 
+ </li>
+	<li>Created new enum type called <font face="Courier New, Courier, mono">DIRECT </font>which does not send any correspondence or follow ups related to this Request to the associated Customer </li>
+			
+	</ul></li>
+
+<br><li><b> CertificateStatus enum
+</b> <ul> 
+	<li>Created new enum type called<font face="Courier New, Courier, mono"> ACTIVE</font> which is active with images received. 
+ </li>
+	<li>Created new enum type called <font face="Courier New, Courier, mono">VOID</font> which has been voided from active use. 
+ </li>
+	<li>Created new enum type called <font face="Courier New, Courier, mono"> INCOMPLETE </font> which does not yet have all of its images received. 
+ </li>
+			
+	</ul></li>
+
+<br><li><b>ReviewStatus enum
+</b> <ul> 
+	<li>Created new enum type called <font face="Courier New, Courier, mono">PENDING </font> which has not yet been reviewed. 
+ </li>
+	<li>Created new enum type called <font face="Courier New, Courier, mono">ACCEPTED</font> which was accepted during review. </li>
+	<li>Created new enum type called<font face="Courier New, Courier, mono"> REJECTED</font> which was rejected during review. 
+ </li>
+			
+	</ul></li>
+
+<br><li><b>CertificateUsage enum
+</b> <ul> 
+	<li>Created new enum type called <font face="Courier New, Courier, mono"> BLANKET </font> which indicates the certificate may be used multiple times. 
+ </li>
+	<li>Created new enum type called<font face="Courier New, Courier, mono"> SINGLE </font>which indicates the certificate may only be used for a single transaction. 
+ </li>
+	<li>Created new enum type called <font face="Courier New, Courier, mono">NULL</font> which indicates value has not been set. </li>
+			
+</ul></li>
+
+</ol>
+
+</blockquote>	
+</p>
+
+<h4>5.8.0</h4>
+<p>This release adds the new AvaCertSvc web service interface. AvaCert is a new web-hosted, exemption certificate management service which automates the collection and management of exemption certificates. See <a href="http://www.avalara.com" target="_blank">www.avalara.com</a> for details. An AvaCert subscription is required to use this service. Contact <a href="http://www.avalara.com" target="_blank">Avalara Sales</a> to sign-up or find out more.</p>
+<h4>5.7.1 - April 2010</h4>
+<p>This version contains the changes to support AvaTax Tax Calculation Centers 
+  (our upcoming high availability solution). This adapter version will work with 
+  the AvaTax 5.7 and later service versions. It is intended to prepare clients 
+  for our upcoming AvaTax HA (6.0) release. It contains changes that may require 
+  code changes for existing changes. These are necessary to work with AvaTax HA 
+  services and Tax Calculation Centers. </p>
+<p><strong>1. Eliminated use of Document Ids</strong></p>
+<blockquote>
+  <p>The DocId properties have been removed from the interface. Document Ids are 
+    internal, persistent identifiers for a specific document. AvaTax 5.6 and earlier 
+    adapters returned a DocId from GetTax which could optionally be used for subsequent 
+    calls to other methods such as PostTax. In the HA environment, DocIds are 
+    not assigned until the document reaches the Primary Data Center; therefore, 
+    DocIds are not available from a TCC (Tax Calculation Center). Use of DocId 
+    has always been optional as an alternative to specifying the CompanyCode, 
+    DocType and DocCode. The DocId properties have been removed from the interface 
+    in this adapter version. Clients that are not using DocIds will continue to 
+    work with no changes. Those using DocIds will need to switch to using DocCodes. 
+  </p>
+  <p>DocId has been removed from the following types. Use DocCode and CompanyCode 
+    instead of DocId. </p>
+  <blockquote> 
+    <p>GetTaxResult <br>
+      PostTaxRequest <br>
+      PostTaxResult <br>
+      CommitTaxRequest <br>
+      CommitTaxResult <br>
+      CancelTaxRequest <br>
+      CancelTaxResult <br>
+      ApplyPaymentRequest <br>
+      ApplyPaymentResult </p>
+  </blockquote>
+  <p><strong>2. Added NewDocCode to PostTax and CommitTax</strong></p>
+  <p class="MsoNormal"> AvaTax allows clients to change the DocCode when calling 
+    PostTax or CommitTax.<span 
+            style="mso-spacerun:yes">&nbsp; </span>This is typically used to assign 
+    an invoice number during posting.<span style="mso-spacerun:yes">&nbsp; </span>If 
+    your application uses this capability, you will need to make some minor code 
+    changes.<span style="mso-spacerun:yes">&nbsp; </span>DocId was previously 
+    used to identify the document and DocCode was used to indicate the new document 
+    code.</p>
+  <p class="MsoNormal"> The DocId property on the PostTaxRequest and CommitTaxRequest 
+    has been replaced with a NewDocCode property.<span style="mso-spacerun:yes">&nbsp; 
+    </span>DocCode is now used to identify the existing document instead of DocId.<span 
+            style="mso-spacerun:yes">&nbsp; </span>NewDocCode indicates the new 
+    DocCode.</p>
+  <p class="MsoNormal"><strong>3. Removed HashCode from the following types. This 
+    has not proven to be useful and will be replaced with a better mechanism in 
+    AvaTax 6.0.</strong></p>
+  <blockquote> 
+    <p class="MsoNormal">GetTaxRequest <br>
+      GetTaxResult <br>
+      PostTaxRequest </p>
+  </blockquote>
+  <p class="MsoNormal"><strong>4. ReconcileTaxHistory Changes</strong></p>
+  <p class="MsoNormal">A number of changes have been made to ReconcileTaxHistory 
+    to eliminate DocIds and provide additional filtering options.</p>
+  <p class="MsoNormal">ReconcileTaxHistoryRequest</p>
+  <blockquote> 
+    <p>DocType has been added as a filter. This allows filtering on SalesInvoices 
+      or other specific types.. A new enum value of DocumentType.Any can be used 
+      to return all types of documents.<br>
+      LastDocId has been replaced with LastDocCode which is used for paging through 
+      the history. Results are now returned sorted by DocCode instead of DocId.<br>
+      PageSize has been added to indicate the number of records to return. This 
+      defaults to 1000 as before.</p>
+  </blockquote>
+  <p>ReconcileTaxHistoryResult</p>
+  <blockquote> 
+    <p>LastDocId has been replaced with LastDocCode. <br>
+      RecordCount has been added to indicate the total number of records in the 
+      ReconcileTaxHistoryResult. </p>
+  </blockquote>
+  <p><strong>5. TaxDetail StateAssignedCode</strong></p>
+  <p>StateAssignedNo has been added to the TaxDetail class. StateAssignedNo indicates 
+    the identifier given to the location by the state. </p>
+  </blockquote>
+<h4>5.3.1 - March 2009</h4>
+<p>Several properties were added and some behavioral changes were made for the 
+  existing ones. </p>
+<p>GetTaxRequest class</p>
+<ul>
+  <li><font face="Courier New, Courier, mono">ExchangeRate</font> has been added. 
+    ExchangeRate indicates the currency exchange rate from the transaction currency 
+    (indicated by CurrencyCode) to the company base currency. This only needs 
+    to be set if the transaction currency is different than the company base currency. 
+    It defaults to 1.0. </li>
+  <li><font face="Courier New, Courier, mono">ExchangeRateEffDate</font> has been 
+    added. ExchangeRateEffDate indicates the effective date of the exchange rate. 
+    It should be set in conjunction with ExchangeRate. It will default to the 
+    DocDate if not set. </li>
+  <li><font face="Courier New, Courier, mono">PaymentDate</font> has been added. 
+    PaymentDate indicates the date when payment was received for the document. 
+    It is only applicable for cash-basis accounting and does not need to be set 
+    otherwise. It defaults to 1/1/1900 which indicates no payment. The new TaxSvc.ApplyPayment 
+    method may be used to apply a payment to an existing invoice.<br>
+    Note: The ReportingDate for a cash-basis invoice will be set to 12/31/9999. 
+  </li>
+</ul>
+<p>GetTaxResult class</p>
+<ul>
+  <li><font face="Courier New, Courier, mono">TotalTaxCalculated</font> has been 
+    added. TotalTaxCalculated indicates the total tax calculated by AvaTax. This 
+    is usually the same as the TotalTax, except when a tax override amount is 
+    specified. This is for informational purposes. The TotalTax will still be 
+    used for reporting. </li>
+  <li><font face="Courier New, Courier, mono">TaxSummary</font> has been added. 
+    TaxSummary is now returned when GetTaxRequest.DetailLevel == DetailLevel.Line 
+    in addition to DetailLevel.Summary. It is not returned for DetailLevel.Document 
+    or DetailLevel.TaxDetail. </li>
+</ul>
+<p>TaxDetail class</p>
+<ul>
+  <li><font face="Courier New, Courier, mono">RateType</font> has been added. 
+    RateType indicates the tax rate type. These currently include: 
+    <ul>
+      <li>F = Food (US) </li>
+      <li>G = General (US) </li>
+      <li>S = Standard (VAT) </li>
+      <li>R = Reduced (VAT)</li>
+      <li> Q = Super Reduced (VAT) </li>
+      <li>A = Reduced Rate 1 (VAT) </li>
+      <li>B = Reduced Rate 2 (VAT) </li>
+      <li>Z = Zero Rate </li>
+    </ul>
+  </li>
+  <li><font face="Courier New, Courier, mono">TaxCalculated</font> has been added. 
+    TaxCalculated indicates the tax calculated by AvaTax. It will usually be the 
+    same as the Tax property, unless it has been overridden by a TaxOverride.TaxAmount.</li>
+  <li><font face="Courier New, Courier, mono">TaxGroup</font> has been added. 
+    TaxGroup indicates the group code when special grouping is enabled for particular 
+    client applications. For other clients, it will be empty. Line class</li>
+  <li><font face="Courier New, Courier, mono">TaxIncluded</font> has been added. 
+    TaxIncluded indicates the tax amount has already been included in the line 
+    Amount. The tax will be reversed out and returned in the TaxLine.Tax property. 
+    The TaxLine.Taxable property will indicate the calculated tax base amount. 
+  </li>
+</ul>
+<p>TaxLine class</p>
+<ul>
+  <li><font face="Courier New, Courier, mono">TaxCalculated</font> has been added. 
+    TaxCalculated indicates the tax calculated by AvaTax. This will normally be 
+    the same as the Tax property unless it has been overridden by a TaxOverride.TaxAmount. 
+  </li>
+  <li><font face="Courier New, Courier, mono">TaxIncluded</font> has been added. 
+    TaxIncluded indicates the tax has already been included in the line item prices. 
+    When true, the Tax property will indicate reversed out tax amount and the 
+    Taxable property will indicate the calculated tax base amount. </li>
+</ul>
+<p>TaxSvc class</p>
+<ul>
+  <li><font face="Courier New, Courier, mono">ApplyPayment</font> has been added. 
+    ApplyPayment allows a payment to be applied to an invoice for companies using 
+    cash-basis accounting. It will update the PaymentDate and ReportingDate for 
+    that invoice. Until a payment is applied to cash-basis invoices, the ReportingDate 
+    will be set to 12/31/9999 to prevent the invoice from being reported. </li>
+</ul>
+<p><strong>5.2.0.0 - August 2008</strong></p>
+<ol>
+  <li><strong>AddressSvc.Validate: </strong>Added a Taxability flag to the ValidateRequest 
+    to retrieve whether the address is a taxable address. This is indicated by 
+    the ValidateResult.Taxable flag.</li>
+  <li><strong>TaxSvc.ApplyPayment</strong>: This is a new method for applying 
+    payments to invoices. This only applies to companies that have CashBasisEnabled 
+    and in US states or countries where the AccountingMethod is set to CashBasis 
+    in the Nexus for that state or country. CashBasis invoices are not considered 
+    reportable until payment has been applied. ApplyPayment will set the Line.ReportingDates 
+    to the PaymentDate. Otherwise, it will be left at 9999-12-31 and won't show 
+    on reports.</li>
+  <li><strong>TaxSvc.GetTax</strong>: 
+    <ol>
+      <li type="a">A new TaxOveride element was added to the GetTaxRequest and 
+        the Line. This allows specifying an overriding tax date and tax amount, 
+        or overriding the exempt status.</li>
+      <li>CurrencyCode was added. The default is USD, if not specified.</li>
+      <li>PaymentDate was added to GetTaxRequest which allows applying a payment 
+        to a cash basis transaction when calculating tax.</li>
+      <li>ExchangeRate and ExchangeRateEffDate were added to GetTaxRequest to 
+        indicate the rate of currency exchange relative to the company's base 
+        currency. This defaults to 1. It should only be set if the transaction 
+        currency is different than the company's base currency. The rate should 
+        be TransactionCurrency * ExchangeRate = BaseCurrency.</li>
+      <li>TotalTaxCalculated has been added to the GetTaxResult and TaxCalculated 
+        has been added to TaxLine and TaxDetail. This indicates the tax that AvaTax 
+        calculated in cases where a TaxOverride was used.</li>
+      <li>TaxSummary was added to the GetTaxResult which contains a summary of 
+        taxes by jurisdiction. This is only returned when the GetTaxRequest.DetailLevel 
+        is Summary or Line.</li>
+      <li>A new global JurisType of Country is now returned for foreign countries, 
+        including Canada. Previously State and County were used for Canada and 
+        Province jurisdictions. To prevent breaking existing clients, this same 
+        behavior is retained unless the Profile.Name is set to &quot;5.1.0&quot; 
+        or later. In general, the version of the avatax4j release should be used 
+        in the Profile.Name. For this release, it should be Profile.Name = &quot;5.2.0.0&quot;.</li>
+    </ol>
+  </li>
+</ol>
+<p><b>5.0.0.271 - June 2007</b></p>
+<div id="nstext">
+	
+  <h4 class="dtH4"><font face="Times New Roman">1 GetTaxRequest class</font></h4>
+	<ul>
+		<li><code><font face="Times New Roman">Commit </font></code>
+		<font face="Times New Roman">has been added. Setting this value to true 
+		will straight away commit the document at the time of GetTax call. This 
+		saves you separate PostTax and CommitTax call. </font></li>
+		<li><code><font face="Times New Roman">IsTotalTaxOverriden </font>
+		</code><font face="Times New Roman">has been added. IsTotalTaxOverriden 
+		indicates to apply tax to this line that has already been calculated by 
+		the seller instead of calculating the tax. </font></li>
+		<li><code><font face="Times New Roman">TotalTaxOverride </font></code>
+		<font face="Times New Roman">has been added. TotalTaxOverride is the tax 
+		amount that has already been calculated by the seller that should be 
+		applied to the line instead of the AvaTax calculate tax. </font></li>
+	</ul>
+	<h4 class="dtH4"><font face="Times New Roman">2 GetTaxResult class</font></h4>
+	<ul>
+		<li><code><font face="Times New Roman">Locked </font></code>
+		<font face="Times New Roman">has been added. Flag identifying the 
+		Document has been locked by Avalara's MRS process.. </font></li>
+		<li><code><font face="Times New Roman">AdjustmentReason&nbsp;</font></code><font face="Times New Roman">has 
+		been added. Valid reason for adjusting document. </font></li>
+		<li><code><font face="Times New Roman">AdjustmentDescription&nbsp;</font></code><font face="Times New Roman">has 
+		been added. Description for adjusting document. </font></li>
+		<li><code><font face="Times New Roman">Version&nbsp;</font></code><font face="Times New Roman">has 
+		been added. This shows current version of document. </font></li>
+		<li><code><font face="Times New Roman">TaxDate&nbsp;</font></code><font face="Times New Roman">has 
+		been added. It is the date used to calculate tax on the Document. </font>
+		</li>
+	</ul>
+	<h4 class="dtH4"><font face="Times New Roman">3 Line class</font></h4>
+	<ul>
+		<li><code><font face="Times New Roman">IsTaxOverriden </font></code>
+		<font face="Times New Roman">has been added. IsTaxOverriden indicates to 
+		apply tax that has already been calculated by the seller instead of 
+		calculating the tax. </font></li>
+		<li><code><font face="Times New Roman">TaxOverride </font></code>
+		<font face="Times New Roman">has been added. TaxOverride is the tax 
+		amount that has already been calculated by the seller that should be 
+		applied instead of the AvaTax calculate tax. </font></li>
+	</ul>
+	<h4 class="dtH4"><font face="Times New Roman">4 Address class</font></h4>
+	<ul>
+		<li><code><font face="Times New Roman">TaxRegionId </font></code>
+		<font face="Times New Roman">has been added. TaxRegionId provides the 
+		ability to override the tax region assignment for an address. </font>
+		</li>
+	</ul>
+	<h4 class="dtH4"><font face="Times New Roman">5 AdjustTax call</font></h4>
+	<ul>
+		<li><code><font face="Times New Roman">AdjustTax </font></code>
+		<font face="Times New Roman">call has been added. This takes 
+		AdjustTaxRequest as an input and returns AdjustTaxResult which inherits 
+		GetTaxResult. </font></li>
+	</ul>
+	<h4 class="dtH4"><font face="Times New Roman">6 AdjustTaxRequest class</font></h4>
+	<ul>
+		<li><code><font face="Times New Roman">AdjustTaxRequest </font></code>
+		<font face="Times New Roman">has been added. It is made of 
+		AdjustmentReason, AdjustmentDescription and GetTaxRequest object. It is 
+		an input for AdjustTax call. </font></li>
+	</ul>
+	<h4 class="dtH4"><font face="Times New Roman">7 AdjustTaxRequest class</font></h4>
+	<ul>
+		<li><code><font face="Times New Roman">AdjustTaxResult </font></code>
+		<font face="Times New Roman">has been added. It is similar to 
+		GetTaxResult object. It is returned from AdjustTax call. </font></li>
+	</ul>
+	<h4 class="dtH4"><font face="Times New Roman">8 PostTaxRequest class</font></h4>
+	<ul>
+		<li><code><font face="Times New Roman">Commit </font></code>
+		<font face="Times New Roman">has been added. Setting this value to true 
+		will straight away commit the document at the time of PostTax call. This 
+		saves you separate CommitTax call. </font></li>
+	</ul>
+	<h4 class="dtH4"><font face="Times New Roman">9 TaxLine class</font></h4>
+	<ul>
+		<li><code><font face="Times New Roman">ExemptCertId </font></code>
+		<font face="Times New Roman">has been added. This specifies ExemptCertId 
+		applied to a particulat Line during GetTax call. </font></li>
+	</ul>
+	<h4 class="dtH4"><font face="Times New Roman">10 CancelCode enum</font></h4>
+	<ul>
+		<li><font face="Times New Roman">Created new enum type called </font>
+		<code><font face="Times New Roman">AdjustmentCancelled</font></code><font face="Times New Roman"> 
+		which cancels the adjustment made. </font></li>
+	</ul>
+	<h4 class="dtH4"><font face="Times New Roman">11 DocStatus enum</font></h4>
+	<ul>
+		<li><font face="Times New Roman">Created new enum type called </font>
+		<code><font face="Times New Roman">Adjusted</font></code><font face="Times New Roman"> 
+		which says document has been adjusted using AdjustTax call. </font></li>
+	</ul>
+</div>
+<h4>4.15.0 - June 2007</h4>
+<ol>
+  <li>Eliminated backward compatibility issue with AvaTax server API changes. 
+    Previously if new elements were added to the server api, it was necessary 
+    to either get a new adapter or make sure that the avatax4j.jar preceeded axis.jar 
+    on the classpath. This was problematic or not possible in some environments. 
+    We are handling this issue now and no longer depend on the classpath order. 
+    Updating the adapter for server API changes is not necessary except when you 
+    wish to use the new features. Backward compatibility will be maintained. We 
+    highly recommend updgrading to this new adapter. No code changes should be 
+    necessary. The interface has not been changed.</li>
+</ol>
+<h4>4.14.0 - May 2007</h4>
+<ol>
+  <li>Eliminated need for wss4j-1.1.0.jar, opensaml-1.0.1.jar, and xmlsec-1.2.1.jar 
+    files. The SOAP security token is now directly built in BaseSvcSoapStub.setSecurity(). 
+    The only required code change is in the wsdd configuration. See the next change 
+    for details.<br>
+  </li>
+  <li>Eliminated the need for the avatax4j.wsdd file. You should simply call the 
+    default AddressSvcLocator() or TaxSvcLocator() constructor instead of passing 
+    a config file (new FileProvider(&quot;avatax4j.wsdd&quot;)). If you wish to 
+    still use a wsdd config file, then you need to remove the &lt;handler type=&quot;java:org.apache.ws.axis.security.WSDoAllSender&quot; 
+    &gt; handler. This is because we no longer use wss4j. See any of the samples 
+    or junit tests for code examples. The handler has been removed from the included 
+    avataxj4.wsdd, but it isn't necessary if you just use the default locator 
+    constructors. <br>
+  </li>
+  <li>Included the activation.jar and mailapi.jar files to eliminate the annoying, 
+    but inocuous &quot;Unable to find required classes (javax.activation.DataHandler 
+    and javax.mail.internet.MimeMultipart). Attachment support is disabled&quot; 
+    warning message.</li>
+</ol>
+<h2>Known Issues</h2>
+<ol>
+  <li>If you get a warning message regarding Xalan as follows:<br>
+    <br>
+    Unable to patch xalan function table.<br>
+    java.lang.NoSuchFieldException: m_functions<br>
+    at java.lang.Class.getField(Unknown Source)<br>
+    at org.apache.xml.security.Init.registerHereFunction(Init.java:429)<br>
+    at org.apache.xml.security.Init.init(Init.java:124)&#8230; (and so on)<br>
+    <br>
+    You need to copy the xalan-2.6.0.jar to your JAVA_HOME/lib/endorsed/ directory. 
+    You may need to create the endorsed directory.<br>
+  </li>
+  <li>Ant test target cannot find the junit task:<br>
+    <br>
+    The easiest way to fix this is to copy the junit jar from the avatax4j/lib 
+    directory to your ant/lib directory.<br>
+  </li>
+  <li>Warning message: &quot;Unable to find required classes (javax.activation.DataHandler 
+    and javax.mail.internet.MimeMultipart). Attachment support is disabled&quot; 
+    occurs. <br>
+    <br>
+    You need to include the activation.jar and mailapi.jar (included in releases 
+    4.14.0 and later). Or you can download these at: <a href="http://java.sun.com/products/javabeans/jaf/downloads/index.html" target="_blank">http://java.sun.com/products/javabeans/jaf/downloads/index.html</a> 
+    and <a href="http://java.sun.com/products/javamail/downloads/index.html" target="_blank">http://java.sun.com/products/javamail/downloads/index.html</a></li>
+</ol>
+</body>
+</html>
