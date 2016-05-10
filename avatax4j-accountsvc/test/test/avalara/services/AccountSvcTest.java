@@ -398,8 +398,8 @@ public class AccountSvcTest extends TestCase
         // Set security
         // New support for account/license vs. username/password login
         Security security = new Security();
-        security.setUserName("registrar@avalara.com");
-        security.setPassword("kennwort");
+        security.setUserName("");
+        security.setPassword("");
 
         // IntelliJ erroneously thinks userNameSet is always true, not sure why. It isn't.
         port.setSecurity(security);
