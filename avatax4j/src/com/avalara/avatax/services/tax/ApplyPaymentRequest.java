@@ -275,5 +275,4 @@ public class ApplyPaymentRequest extends BaseRequest implements java.io.Serializ
           new  com.avalara.avatax.services.base.ser.BeanDeserializer(
             _javaType, _xmlType, typeDesc);
     }
-
 }

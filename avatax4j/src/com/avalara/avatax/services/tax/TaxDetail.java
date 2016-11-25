@@ -27,17 +27,21 @@ public class TaxDetail  implements java.io.Serializable {
 
     private java.math.BigDecimal base;
     private java.math.BigDecimal taxable;
+    private java.math.BigDecimal taxableValue;		//Taxsvc2
     private java.math.BigDecimal rate;
     private java.lang.String rateType;
     private java.math.BigDecimal tax;
     private java.math.BigDecimal taxCalculated;
     private java.math.BigDecimal nonTaxable;
+    private java.math.BigDecimal nonTaxableValue;	//Taxsvc2
     private java.math.BigDecimal exemption;
     private java.lang.String jurisName;
     private java.lang.String taxName;
     private int taxAuthorityType;
     private java.lang.String taxGroup;
     private java.lang.String stateAssignedNo;
+    private java.math.BigDecimal exemptValue;	//Taxsvc2
+    private java.lang.String unitOfBasis;		//Taxsvc2
     /**
      * Initializes a new instance of the class.
      */
@@ -61,21 +65,29 @@ public class TaxDetail  implements java.io.Serializable {
             com.avalara.avatax.services.tax.TaxType taxType,
             java.math.BigDecimal base,
             java.math.BigDecimal taxable,
+            java.math.BigDecimal taxableValue,
             java.math.BigDecimal rate,
             java.math.BigDecimal tax,
             java.math.BigDecimal nonTaxable,
+            java.math.BigDecimal nonTaxableValue,
             java.math.BigDecimal exemption,
+            java.math.BigDecimal exemptValue,
+			java.lang.String unitOfBasis,
             java.lang.String jurisName) {
         this.jurisType = jurisType;
         this.jurisCode = jurisCode;
         this.taxType = taxType;
         this.base = base;
         this.taxable = taxable;
+        this.taxableValue = taxableValue;			//Taxsvc2
         this.rate = rate;
         this.rateType = "";
         this.tax = tax;
-        this.nonTaxable = nonTaxable;
-        this.exemption = exemption;
+        this.nonTaxable = nonTaxable;				
+        this.nonTaxableValue = nonTaxableValue;		//Taxsvc2
+        this.exemptValue = exemptValue;				//Taxsvc2
+        this.exemption = exemption;					
+        this.unitOfBasis = unitOfBasis;				//Taxsvc2
         this.jurisName = jurisName;
         this.taxName = taxName;
         this.taxAuthorityType = taxAuthorityType;
@@ -238,7 +250,6 @@ public class TaxDetail  implements java.io.Serializable {
         return taxable;
     }
 
-
     /**
      *  The taxable amount.  Replaces setBase().
      *
@@ -248,6 +259,24 @@ public class TaxDetail  implements java.io.Serializable {
         this.taxable = taxable;
     }
 
+    //Taxsvc2
+    public java.math.BigDecimal getTaxableValue() {
+        return taxableValue;
+    }
+
+    public void setTaxableValue(java.math.BigDecimal taxableValue) {
+        this.taxableValue = taxableValue;
+    }
+
+    //Taxsvc2
+    public java.math.BigDecimal getExemptValue() {
+        return exemptValue;
+    }
+
+	//Taxsvc2
+    public void setExemptValue(java.math.BigDecimal exemptValue) {
+        this.exemptValue = exemptValue;
+    }
 
     /**
      * Gets the rate value for this TaxDetail.
@@ -347,7 +376,15 @@ public class TaxDetail  implements java.io.Serializable {
         this.nonTaxable = nonTaxable;
     }
 
-
+	//Taxsvc2
+    public java.math.BigDecimal getNonTaxableValue() {
+        return nonTaxableValue;
+    }
+	
+	//Taxsvc2
+    public void setNonTaxableValue(java.math.BigDecimal nonTaxableValue) {
+        this.nonTaxableValue = nonTaxableValue;
+    }
     /**
      * The exempt amount.
      *
@@ -387,7 +424,15 @@ public class TaxDetail  implements java.io.Serializable {
         this.jurisName = jurisName;
     }
 
+    //Taxsvc2
+	public java.lang.String getUnitOfBasis() {
+        return unitOfBasis;
+    }
 
+	//Taxsvc2
+    public void setUnitOfBasis(java.lang.String unitOfBasis) {
+        this.unitOfBasis = unitOfBasis;
+    }
     /**
      * Gets the taxName value.
      * <p>
@@ -509,6 +554,9 @@ public class TaxDetail  implements java.io.Serializable {
                 ((this.taxable==null && other.getTaxable()==null) ||
                         (this.taxable!=null &&
                                 this.taxable.equals(other.getTaxable()))) &&
+                ((this.taxableValue==null && other.getTaxableValue()==null) ||
+                        (this.taxableValue!=null &&
+                                this.taxableValue.equals(other.getTaxableValue()))) &&
                 ((this.rate==null && other.getRate()==null) ||
                         (this.rate!=null &&
                                 this.rate.equals(other.getRate()))) &&
@@ -524,12 +572,21 @@ public class TaxDetail  implements java.io.Serializable {
                 ((this.nonTaxable==null && other.getNonTaxable()==null) ||
                         (this.nonTaxable!=null &&
                                 this.nonTaxable.equals(other.getNonTaxable()))) &&
+                ((this.nonTaxableValue==null && other.getNonTaxableValue()==null) ||
+                        (this.nonTaxableValue!=null &&
+                                this.nonTaxableValue.equals(other.getNonTaxableValue()))) &&
+                ((this.exemptValue==null && other.getExemptValue()==null) ||
+                        (this.exemptValue!=null &&
+                                this.exemptValue.equals(other.getExemptValue()))) &&
                 ((this.exemption==null && other.getExemption()==null) ||
                         (this.exemption!=null &&
                                 this.exemption.equals(other.getExemption()))) &&
                 ((this.jurisName==null && other.getJurisName()==null) ||
                         (this.jurisName!=null &&
                                 this.jurisName.equals(other.getJurisName()))) &&
+                ((this.unitOfBasis==null && other.getUnitOfBasis()==null) ||
+                        (this.unitOfBasis!=null &&
+                                this.unitOfBasis.equals(other.getUnitOfBasis()))) &&
                 ((this.taxName==null && other.getTaxName()==null) ||
                         (this.taxName!=null &&
                                 this.taxName.equals(other.getTaxName()))) &&
@@ -580,6 +637,10 @@ public class TaxDetail  implements java.io.Serializable {
         if (getTaxable() != null) {
             _hashCode += getTaxable().hashCode();
         }
+		//Taxsvc2
+        if (getTaxableValue() != null) {
+            _hashCode += getTaxableValue().hashCode();
+        }
         if (getRate() != null) {
             _hashCode += getRate().hashCode();
         }
@@ -592,11 +653,23 @@ public class TaxDetail  implements java.io.Serializable {
         if (getNonTaxable() != null) {
             _hashCode += getNonTaxable().hashCode();
         }
+		//Taxsvc2
+        if (getNonTaxableValue() != null) {
+            _hashCode += getNonTaxableValue().hashCode();
+        }
+		//Taxsvc2
+        if (getExemptValue() != null) {
+            _hashCode += getExemptValue().hashCode();
+        }
         if (getExemption() != null) {
             _hashCode += getExemption().hashCode();
         }
         if (getJurisName() != null) {
             _hashCode += getJurisName().hashCode();
+        }
+		//Taxsvc2
+        if (getUnitOfBasis() != null) {
+            _hashCode += getUnitOfBasis().hashCode();
         }
         if (getTaxName() != null) {
             _hashCode += getTaxName().hashCode();
@@ -731,6 +804,36 @@ public class TaxDetail  implements java.io.Serializable {
         elemField.setFieldName("stateAssignedNo");
         elemField.setXmlName(new javax.xml.namespace.QName("http://avatax.avalara.com/services", "StateAssignedNo"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
+        elemField.setMinOccurs(0);			//Added line - Taxsvc2
+        elemField.setNillable(false);
+        typeDesc.addFieldDesc(elemField);
+		//Added below for Taxsvc2
+        elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("taxableValue");
+        elemField.setXmlName(new javax.xml.namespace.QName("http://avatax.avalara.com/services", "TaxableValue"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "decimal"));
+        elemField.setMinOccurs(0);
+        elemField.setNillable(false);
+        typeDesc.addFieldDesc(elemField);
+        elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("nonTaxableValue");
+        elemField.setXmlName(new javax.xml.namespace.QName("http://avatax.avalara.com/services", "NonTaxableValue"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "decimal"));
+        elemField.setMinOccurs(0);
+        elemField.setNillable(false);
+        typeDesc.addFieldDesc(elemField);
+        elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("exemptValue");
+        elemField.setXmlName(new javax.xml.namespace.QName("http://avatax.avalara.com/services", "ExemptValue"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "decimal"));
+        elemField.setMinOccurs(0);
+        elemField.setNillable(false);
+        typeDesc.addFieldDesc(elemField);
+        elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("unitOfBasis");
+        elemField.setXmlName(new javax.xml.namespace.QName("http://avatax.avalara.com/services", "UnitOfBasis"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
+        elemField.setMinOccurs(0);
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
     }

@@ -10,7 +10,10 @@ package com.avalara.avatax.services.tax;
 import com.avalara.avatax.services.base.Timer;
 import org.apache.axis.AxisFault;
 
-import java.net.SocketTimeoutException;
+//import java.net.SocketTimeoutException;
+//import org.apache.axis.AxisFault;
+
+import java.rmi.RemoteException;
 
 /**
  * Axis-generated class that implements the proxy interface {@link TaxSvcSoap}
@@ -172,7 +175,30 @@ public class TaxSvcSoapStub extends com.avalara.avatax.services.base.BaseSvcSoap
         oper.setUse(org.apache.axis.constants.Use.LITERAL);
         _operations[9] = oper;
         
+        //Added for ParameterBagtem - Taxsvc2 changes
+        oper = new org.apache.axis.description.OperationDesc();
+        oper.setName("GetParameterBagItems");
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://avatax.avalara.com/services", "GetParameterBagItemsRequest"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://avatax.avalara.com/services", "GetParameterBagItemsRequest"), com.avalara.avatax.services.tax.GetParameterBagItemsRequest.class, false, false);
+        oper.addParameter(param);
+        oper.setReturnType(new javax.xml.namespace.QName("http://avatax.avalara.com/services", "GetParameterBagItemsResult"));
+        oper.setReturnClass(com.avalara.avatax.services.tax.GetParameterBagItemsResult.class);
+        oper.setReturnQName(new javax.xml.namespace.QName("http://avatax.avalara.com/services", "GetParameterBagItemsResult"));
+        oper.setStyle(org.apache.axis.constants.Style.WRAPPED);
+        oper.setUse(org.apache.axis.constants.Use.LITERAL);
+        _operations[10] = oper;
 
+        //Added for AllParameterBagtem - Taxsvc2 changes
+        oper = new org.apache.axis.description.OperationDesc();
+        oper.setName("GetAllParameterBagItems");
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://avatax.avalara.com/services", "GetAllParameterBagItemsRequest"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://avatax.avalara.com/services", "GetAllParameterBagItemsRequest"), com.avalara.avatax.services.tax.GetParameterBagItemsRequest.class, false, false);
+        oper.addParameter(param);
+        oper.setReturnType(new javax.xml.namespace.QName("http://avatax.avalara.com/services", "GetAllParameterBagItemsResult"));
+        oper.setReturnClass(com.avalara.avatax.services.tax.GetAllParameterBagItemsResult.class);
+        oper.setReturnQName(new javax.xml.namespace.QName("http://avatax.avalara.com/services", "GetAllParameterBagItemsResult"));
+        oper.setStyle(org.apache.axis.constants.Style.WRAPPED);
+        oper.setUse(org.apache.axis.constants.Use.LITERAL);
+        _operations[11] = oper;
+        
     }
 
     /**
@@ -909,24 +935,141 @@ public class TaxSvcSoapStub extends com.avalara.avatax.services.base.BaseSvcSoap
 
         setRequestHeaders(_call);
         setAttachments(_call);
- try {
+		try {
      
-     java.lang.Object _resp = invokeService(_call,new java.lang.Object[] {applyPaymentRequest});
+			 java.lang.Object _resp = invokeService(_call,new java.lang.Object[] {applyPaymentRequest});
 
-        if (_resp instanceof java.rmi.RemoteException) {
-            throw (java.rmi.RemoteException)_resp;
-        }
-        else {
-            extractAttachments(_call);
-            try {
-                return (com.avalara.avatax.services.tax.ApplyPaymentResult) _resp;
-            } catch (java.lang.Exception _exception) {
-                return (com.avalara.avatax.services.tax.ApplyPaymentResult) org.apache.axis.utils.JavaUtils.convert(_resp, com.avalara.avatax.services.tax.ApplyPaymentResult.class);
-            }
-        }
-  } catch (org.apache.axis.AxisFault axisFaultException) {
-  throw axisFaultException;
-}
+				if (_resp instanceof java.rmi.RemoteException) {
+					throw (java.rmi.RemoteException)_resp;
+				}
+				else {
+					extractAttachments(_call);
+					try {
+						return (com.avalara.avatax.services.tax.ApplyPaymentResult) _resp;
+					} catch (java.lang.Exception _exception) {
+						return (com.avalara.avatax.services.tax.ApplyPaymentResult) org.apache.axis.utils.JavaUtils.convert(_resp, com.avalara.avatax.services.tax.ApplyPaymentResult.class);
+					}
+				}
+		  } catch (org.apache.axis.AxisFault axisFaultException) {
+		  throw axisFaultException;
+		}
     }
    
+	//Added for ParameterBagtem - Taxsvc2 changes
+	public com.avalara.avatax.services.tax.GetParameterBagItemsResult getParameterBagItems(com.avalara.avatax.services.tax.GetParameterBagItemsRequest getParameterBagItemsRequest) throws java.rmi.RemoteException {
+        if (super.cachedEndpoint == null) {
+            throw new org.apache.axis.NoEndPointException();
+        }
+        org.apache.axis.client.Call _call = createCall();
+        _call.setOperation(_operations[10]);
+        _call.setUseSOAPAction(true);
+        _call.setSOAPActionURI("http://avatax.avalara.com/services/GetParameterBagItems");
+        _call.setEncodingStyle(null);
+        _call.setProperty(org.apache.axis.client.Call.SEND_TYPE_ATTR, Boolean.FALSE);
+        _call.setProperty(org.apache.axis.AxisEngine.PROP_DOMULTIREFS, Boolean.FALSE);
+        _call.setSOAPVersion(org.apache.axis.soap.SOAPConstants.SOAP11_CONSTANTS);
+        _call.setOperationName(new javax.xml.namespace.QName("http://avatax.avalara.com/services", "GetParameterBagItems"));
+
+        setRequestHeaders(_call);
+        setAttachments(_call);
+		try {
+     
+			 java.lang.Object _resp = invokeService(_call,new java.lang.Object[] {getParameterBagItemsRequest});
+
+				if (_resp instanceof java.rmi.RemoteException) {
+					throw (java.rmi.RemoteException)_resp;
+				}
+				else {
+					extractAttachments(_call);
+					try {
+						return (com.avalara.avatax.services.tax.GetParameterBagItemsResult) _resp;
+					} catch (java.lang.Exception _exception) {
+						return (com.avalara.avatax.services.tax.GetParameterBagItemsResult) org.apache.axis.utils.JavaUtils.convert(_resp, com.avalara.avatax.services.tax.GetParameterBagItemsResult.class);
+					}
+				}
+		  } catch (org.apache.axis.AxisFault axisFaultException) {
+		  throw axisFaultException;
+		}
+    }
+
+	//Added for GetAllParameterBagtems - Taxsvc2 changes
+    public com.avalara.avatax.services.tax.GetAllParameterBagItemsResult getParameterBagItems() throws java.rmi.RemoteException {
+        if (super.cachedEndpoint == null) {
+            throw new org.apache.axis.NoEndPointException();
+        }
+        org.apache.axis.client.Call _call = createCall();
+        _call.setOperation(_operations[11]);
+        _call.setUseSOAPAction(true);
+        _call.setSOAPActionURI("http://avatax.avalara.com/services/GetAllParameterBagItems");
+        _call.setEncodingStyle(null);
+        _call.setProperty(org.apache.axis.client.Call.SEND_TYPE_ATTR, Boolean.FALSE);
+        _call.setProperty(org.apache.axis.AxisEngine.PROP_DOMULTIREFS, Boolean.FALSE);
+        _call.setSOAPVersion(org.apache.axis.soap.SOAPConstants.SOAP11_CONSTANTS);
+        _call.setOperationName(new javax.xml.namespace.QName("http://avatax.avalara.com/services", "GetAllParameterBagItems"));
+
+        setRequestHeaders(_call);
+        setAttachments(_call);
+		try {
+     
+			 java.lang.Object _resp = invokeService(_call,new java.lang.Object[] {});
+
+				if (_resp instanceof java.rmi.RemoteException) {
+					throw (java.rmi.RemoteException)_resp;
+				}
+				else {
+					extractAttachments(_call);
+					try {
+						return (com.avalara.avatax.services.tax.GetAllParameterBagItemsResult) _resp;
+					} catch (java.lang.Exception _exception) {
+						return (com.avalara.avatax.services.tax.GetAllParameterBagItemsResult) org.apache.axis.utils.JavaUtils.convert(_resp, com.avalara.avatax.services.tax.GetAllParameterBagItemsResult.class);
+					}
+				}
+		  } catch (org.apache.axis.AxisFault axisFaultException) {
+		  throw axisFaultException;
+		}
+    }
+
+    @Override
+	public GetAllParameterBagItemsResult getAllParameterBagItems(com.avalara.avatax.services.tax.GetParameterBagItemsRequest getParameterBagItemsRequest) throws RemoteException {
+		// TODO Auto-generated method stub
+		//return null;
+
+        if (super.cachedEndpoint == null) {
+            throw new org.apache.axis.NoEndPointException();
+        }
+        org.apache.axis.client.Call _call = createCall();
+        _call.setOperation(_operations[11]);
+        _call.setUseSOAPAction(true);
+        _call.setSOAPActionURI("http://avatax.avalara.com/services/GetAllParameterBagItems");
+        _call.setEncodingStyle(null);
+        _call.setProperty(org.apache.axis.client.Call.SEND_TYPE_ATTR, Boolean.FALSE);
+        _call.setProperty(org.apache.axis.AxisEngine.PROP_DOMULTIREFS, Boolean.FALSE);
+        _call.setSOAPVersion(org.apache.axis.soap.SOAPConstants.SOAP11_CONSTANTS);
+        _call.setOperationName(new javax.xml.namespace.QName("http://avatax.avalara.com/services", "GetAllParameterBagItems"));
+
+        //setRequestHeaders(_call);
+        setAttachments(_call);
+		
+        //return (com.avalara.avatax.services.tax.GetAllParameterBagItemsResult);
+        
+        try {
+     
+			 java.lang.Object _resp = invokeService(_call,new java.lang.Object[] {});
+
+				if (_resp instanceof java.rmi.RemoteException) {
+					throw (java.rmi.RemoteException)_resp;
+				}
+				else {
+					extractAttachments(_call);
+					try {
+						return (com.avalara.avatax.services.tax.GetAllParameterBagItemsResult) _resp;
+					} catch (java.lang.Exception _exception) {
+						return (com.avalara.avatax.services.tax.GetAllParameterBagItemsResult) org.apache.axis.utils.JavaUtils.convert(_resp, com.avalara.avatax.services.tax.GetAllParameterBagItemsResult.class);
+					}
+				}
+		  } catch (org.apache.axis.AxisFault axisFaultException) {
+		  throw axisFaultException;
+		}
+    
+    }
 }

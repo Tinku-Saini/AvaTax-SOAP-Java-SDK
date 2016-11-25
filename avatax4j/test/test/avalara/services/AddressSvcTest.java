@@ -214,8 +214,8 @@ public class AddressSvcTest extends TestCase
         Assert.assertEquals(SeverityLevel.Success, result.getResultCode());
         ValidAddress validAddress = result.getValidAddresses().getValidAddress(0);
         Assert.assertEquals("900 WINSLOW WAY E STE 130", validAddress.getLine1());
-        Assert.assertEquals("BAINBRIDGE IS WA 98110-2450", validAddress.getLine4());
-        Assert.assertEquals("5303500000", validAddress.getFipsCode());
+        Assert.assertEquals("BAINBRIDGE ISLAND WA 98110-2766", validAddress.getLine4());
+        Assert.assertEquals("5303503736", validAddress.getFipsCode());
         Assert.assertEquals("KITSAP", validAddress.getCounty());
         Assert.assertEquals(true, result.isTaxable());
     }
@@ -247,8 +247,8 @@ public class AddressSvcTest extends TestCase
         ValidAddress validAddress = result.getValidAddresses().getValidAddress(0);
 
         Assert.assertEquals("900 WINSLOW WAY E STE 130", validAddress.getLine1());
-        Assert.assertEquals("BAINBRIDGE IS WA 98110-2450", validAddress.getLine4());
-        Assert.assertEquals("5303500000", validAddress.getFipsCode());
+        Assert.assertEquals("BAINBRIDGE ISLAND WA 98110-2766", validAddress.getLine4());
+        Assert.assertEquals("5303503736", validAddress.getFipsCode());
         Assert.assertEquals("KITSAP", validAddress.getCounty());
         Assert.assertTrue(validAddress.getTaxRegionId()!=0);
         request.setTaxability(false);
@@ -294,7 +294,7 @@ public class AddressSvcTest extends TestCase
         Assert.assertTrue( "Expected messageArray back", messageArray != null
                 && messageArray.getMessage().length > 0);
         messages = messageArray.getMessage();
-        Assert.assertEquals(messages[0].getName(),"PostalCodeError");
+        Assert.assertEquals(messages[0].getName(),"CityError");
         // Assert.assertTrue("Expected AddressUnknownStreetError",
         //        messages[0].getName().equals("AddressUnknownStreetError"));
         //Assert.assertTrue()
@@ -357,8 +357,8 @@ public class AddressSvcTest extends TestCase
         address.setCity("Bainbridge Island");
         address.setRegion ("WA");
         address.setPostalCode("98110");
-        address.setLongitude("-122.510359");
-        address.setLatitude("47.624972");
+        address.setLongitude("-122.510325");
+        address.setLatitude("47.624964");
 
         ValidateRequest validateRequest = new ValidateRequest();
         validateRequest.setAddress(address);
@@ -400,7 +400,7 @@ public class AddressSvcTest extends TestCase
             assertEquals("", validAddress.getLine2());
             assertEquals(address.getCity().toUpperCase(), validAddress.getCity());
             assertEquals(address.getRegion().toUpperCase(), validAddress.getRegion());
-            assertEquals(address.getPostalCode() + "-2450", validAddress.getPostalCode());
+            assertEquals(address.getPostalCode() + "-2766", validAddress.getPostalCode());
             assertEquals("H", validAddress.getAddressType());
             assertEquals("C051", validAddress.getCarrierRoute());
 
@@ -412,8 +412,8 @@ public class AddressSvcTest extends TestCase
 
             assertEquals("KITSAP", validAddress.getCounty());
             assertEquals(address.getCity().toUpperCase() + " " + address.getRegion().toUpperCase()
-                             + " " + address.getPostalCode() + "-2450", validAddress.getLine4());
-            assertEquals("981102450307", validAddress.getPostNet());
+                             + " " + address.getPostalCode() + "-2766", validAddress.getLine4());
+            assertEquals("981102766307", validAddress.getPostNet());
 
             // Added 4.13 changes for the Lat Long
             // Update to check for ZIP+4 precision

@@ -49,6 +49,22 @@ public class GetTaxRequest extends BaseRequest  implements java.io.Serializable 
     private java.lang.String businessIdentificationNo;
 	private java.lang.String posLaneCode;
 
+	//Added for Taxsvc2
+    private com.avalara.avatax.services.tax.ArrayOfAddressLocationType addressLocationTypes;
+    private boolean isSellerImporterOfRecord;
+    private com.avalara.avatax.services.tax.BRBuyerTypeEnum bRBuyerType;	//enum
+    private boolean bRBuyer_IsExemptOrCannotWH_IRRF;
+    private boolean bRBuyer_IsExemptOrCannotWH_PISRF;
+    private boolean bRBuyer_IsExemptOrCannotWH_COFINSRF;
+    private boolean bRBuyer_IsExemptOrCannotWH_CSLLRF;
+    private boolean bRBuyer_IsExempt_PIS;
+    private boolean bRBuyer_IsExempt_COFINS;
+    private boolean bRBuyer_IsExempt_CSLL;
+    private java.lang.String description;
+    private java.lang.String email;
+    private com.avalara.avatax.services.tax.ArrayOfParameterBagItem parameterBagItems;
+	//Taxsvc2 changes end
+
     /**
      * Initializes a new instance of the class.
      */
@@ -66,7 +82,20 @@ public class GetTaxRequest extends BaseRequest  implements java.io.Serializable 
         this.exchangeRateEffDate=calendar.getTime();
 
         this.exchangeRate=new BigDecimal(1.0);
-    }
+
+		//Taxsvc2 changes
+		addressLocationTypes = new ArrayOfAddressLocationType();
+		parameterBagItems = new ArrayOfParameterBagItem();
+        this.isSellerImporterOfRecord = false;
+        bRBuyerType = BRBuyerTypeEnum.IND;
+        this.bRBuyer_IsExemptOrCannotWH_IRRF = false;
+        this.bRBuyer_IsExemptOrCannotWH_PISRF = false;
+        this.bRBuyer_IsExemptOrCannotWH_COFINSRF = false;
+        this.bRBuyer_IsExemptOrCannotWH_CSLLRF = false;
+        this.bRBuyer_IsExempt_PIS = false;
+        this.bRBuyer_IsExempt_COFINS = false;
+        this.bRBuyer_IsExempt_CSLL = false;
+	}
 
     /**
      * Gets the client application company reference code.
@@ -105,6 +134,12 @@ public class GetTaxRequest extends BaseRequest  implements java.io.Serializable 
         return docType;
     }
 
+     /*
+     * Taxsvc2
+     */
+    public com.avalara.avatax.services.tax.BRBuyerTypeEnum getBRBuyerType() {
+        return bRBuyerType;
+    }
 
     /**
      * The document type specifies the category of the document and affects
@@ -123,6 +158,11 @@ public class GetTaxRequest extends BaseRequest  implements java.io.Serializable 
         this.docType = docType;
     }
 
+     /* Taxsvc2
+     */
+    public void setBRBuyerType(com.avalara.avatax.services.tax.BRBuyerTypeEnum bRBuyerType) {
+        this.bRBuyerType = bRBuyerType;
+    }
 
     /**
      * Gets the Document Code, i.e., the internal reference code used by the client application.
@@ -379,6 +419,18 @@ public class GetTaxRequest extends BaseRequest  implements java.io.Serializable 
         return addresses;
     }
 
+    /**	Taxsvc2
+     * Gets the addresses location types for this GetTaxRequest.
+     */
+    public com.avalara.avatax.services.tax.ArrayOfAddressLocationType getAddressLocationTypes() {
+        return addressLocationTypes;
+    }
+	
+    /**	Taxsvc2
+     */
+    public com.avalara.avatax.services.tax.ArrayOfParameterBagItem getParameterBagItems() {
+        return parameterBagItems;
+    }
 
     /**
      * Sets the addresses for this request.  These are referenced by AddressCode from
@@ -395,6 +447,20 @@ public class GetTaxRequest extends BaseRequest  implements java.io.Serializable 
         this.addresses = addresses;
     }
 
+     /* Taxsvc2
+     * @param addressLocationTypes
+     */
+    public void setAddressLocationTypes(com.avalara.avatax.services.tax.ArrayOfAddressLocationType addressLocationTypes)
+    {
+        this.addressLocationTypes = addressLocationTypes;
+    }
+
+     /* Taxsvc2
+     */
+    public void setParameterBagItems(com.avalara.avatax.services.tax.ArrayOfParameterBagItem parameterBagItems)
+    {
+        this.parameterBagItems = parameterBagItems;
+    }
 
     /**
      * Document line items list.
@@ -489,7 +555,53 @@ public class GetTaxRequest extends BaseRequest  implements java.io.Serializable 
         return commit;
     }
 
+    /** Taxsvc2
+     */
+    public boolean getIsSellerImporterOfRecord() {
+        return isSellerImporterOfRecord;
+    }
 
+    /** Taxsvc2
+     */
+    public boolean getBRBuyer_IsExemptOrCannotWH_IRRF() {
+        return bRBuyer_IsExemptOrCannotWH_IRRF;
+    }
+
+    /** Taxsvc2
+     */
+    public boolean getBRBuyer_IsExemptOrCannotWH_PISRF() {
+        return bRBuyer_IsExemptOrCannotWH_PISRF;
+    }
+
+    /** Taxsvc2
+     */
+    public boolean getBRBuyer_IsExemptOrCannotWH_COFINSRF() {
+        return bRBuyer_IsExemptOrCannotWH_COFINSRF;
+    }
+
+    /** Taxsvc2
+     */
+    public boolean getBRBuyer_IsExemptOrCannotWH_CSLLRF() {
+        return bRBuyer_IsExemptOrCannotWH_CSLLRF;
+    }
+
+    /** Taxsvc2
+     */
+    public boolean getBRBuyer_IsExempt_PIS() {
+        return bRBuyer_IsExempt_PIS;
+    }
+
+    /** Taxsvc2
+     */
+    public boolean getBRBuyer_IsExempt_COFINS() {
+        return bRBuyer_IsExempt_COFINS;
+    }
+
+    /** Taxsvc2
+     */
+    public boolean getBRBuyer_IsExempt_CSLL() {
+        return bRBuyer_IsExempt_CSLL;
+    }
     /**
      * Sets the commit value for this GetTaxRequest.
      * <p>
@@ -504,26 +616,72 @@ public class GetTaxRequest extends BaseRequest  implements java.io.Serializable 
         this.commit = commit;
     }
 
+     /* Taxsvc2
+     */
+    public void setIsSellerImporterOfRecord(boolean isSellerImporterOfRecord) {
+        this.isSellerImporterOfRecord = isSellerImporterOfRecord;
+    }
 
+     /* Taxsvc2
+     */
+    public void setBRBuyer_IsExemptOrCannotWH_IRRF(boolean bRBuyer_IsExemptOrCannotWH_IRRF) {
+        this.bRBuyer_IsExemptOrCannotWH_IRRF = bRBuyer_IsExemptOrCannotWH_IRRF;
+    }
+
+     /* Taxsvc2
+     */
+    public void setBRBuyer_IsExemptOrCannotWH_PISRF(boolean bRBuyer_IsExemptOrCannotWH_PISRF) {
+        this.bRBuyer_IsExemptOrCannotWH_PISRF = bRBuyer_IsExemptOrCannotWH_PISRF;
+    }
+
+     /* Taxsvc2
+     */
+    public void setBRBuyer_IsExemptOrCannotWH_COFINSRF(boolean bRBuyer_IsExemptOrCannotWH_COFINSRF) {
+        this.bRBuyer_IsExemptOrCannotWH_COFINSRF = bRBuyer_IsExemptOrCannotWH_COFINSRF;
+    }
+
+     /* Taxsvc2
+     */
+    public void setBRBuyer_IsExemptOrCannotWH_CSLLRF(boolean bRBuyer_IsExemptOrCannotWH_CSLLRF) {
+        this.bRBuyer_IsExemptOrCannotWH_CSLLRF = bRBuyer_IsExemptOrCannotWH_CSLLRF;
+    }
+
+     /* Taxsvc2
+     */
+    public void setBRBuyer_IsExempt_PIS(boolean bRBuyer_IsExempt_PIS) {
+        this.bRBuyer_IsExempt_PIS = bRBuyer_IsExempt_PIS;
+    }
+
+     /* Taxsvc2
+     */
+    public void setBRBuyer_IsExempt_COFINS(boolean BRBuyer_IsExempt_COFINS) {
+        this.bRBuyer_IsExempt_COFINS = bRBuyer_IsExempt_COFINS;
+    }
+
+     /* Taxsvc2
+     */
+    public void setBRBuyer_IsExempt_CSLL(boolean bRBuyer_IsExempt_CSLL) {
+        this.bRBuyer_IsExempt_CSLL = bRBuyer_IsExempt_CSLL;
+    }
     /**
-         * Gets the batchCode value for this GetTaxRequest.
-         *
-         * @return batchCode
-         */
-        public java.lang.String getBatchCode() {
-            return batchCode;
-        }
+	 * Gets the batchCode value for this GetTaxRequest.
+	 *
+	 * @return batchCode
+	 */
+	public java.lang.String getBatchCode() {
+		return batchCode;
+	}
 
 
-        /**
-         * Sets the batchCode value for this GetTaxRequest.
-         *
-         * @param batchCode
-         */
-        public void setBatchCode(java.lang.String batchCode) {
-            this.batchCode = batchCode;
-        }
-    
+	/**
+	 * Sets the batchCode value for this GetTaxRequest.
+	 *
+	 * @param batchCode
+	 */
+	public void setBatchCode(java.lang.String batchCode) {
+		this.batchCode = batchCode;
+	}
+
 
      /* Gets the taxOverride value for this GetTaxRequest.
      * 
@@ -675,6 +833,18 @@ public class GetTaxRequest extends BaseRequest  implements java.io.Serializable 
         return posLaneCode;
     }
 
+     /* Taxsvc2
+     */
+    public java.lang.String getDescription() {
+        return description;
+    }
+
+     /* Taxsvc2
+     */
+    public java.lang.String getEmail() {
+        return email;
+    }
+
     /**
      * Sets the posLaneCode value for this GetTaxRequest.
      *
@@ -684,6 +854,17 @@ public class GetTaxRequest extends BaseRequest  implements java.io.Serializable 
         this.posLaneCode = posLaneCode;
     }
 
+     /* Taxsvc2
+     */
+    public void setDescription(java.lang.String description) {
+        this.description = description;
+    }
+
+    /* Taxsvc2
+    */
+    public void setEmail(java.lang.String email) {
+        this.email = email;
+    }
 	
     private java.lang.Object __equalsCalc = null;
     public synchronized boolean equals(java.lang.Object obj) {
@@ -703,6 +884,9 @@ public class GetTaxRequest extends BaseRequest  implements java.io.Serializable 
                 ((this.docType==null && other.getDocType()==null) ||
                         (this.docType!=null &&
                                 this.docType.equals(other.getDocType()))) &&
+                ((this.bRBuyerType==null && other.getBRBuyerType()==null) ||
+                        (this.bRBuyerType!=null &&
+                                this.bRBuyerType.equals(other.getBRBuyerType()))) &&
                 ((this.docCode==null && other.getDocCode()==null) ||
                         (this.docCode!=null &&
                                 this.docCode.equals(other.getDocCode()))) &&
@@ -736,6 +920,12 @@ public class GetTaxRequest extends BaseRequest  implements java.io.Serializable 
                 ((this.addresses==null && other.getAddresses()==null) ||
                         (this.addresses!=null &&
                                 this.addresses.equals(other.getAddresses()))) &&
+                ((this.addressLocationTypes==null && other.getAddressLocationTypes()==null) ||
+                        (this.addressLocationTypes!=null &&
+                                this.addressLocationTypes.equals(other.getAddressLocationTypes()))) &&
+                ((this.parameterBagItems==null && other.getParameterBagItems()==null) ||
+                        (this.parameterBagItems!=null &&
+                                this.parameterBagItems.equals(other.getParameterBagItems()))) &&
                 ((this.lines==null && other.getLines()==null) ||
                         (this.lines!=null &&
                                 this.lines.equals(other.getLines()))) &&
@@ -749,6 +939,14 @@ public class GetTaxRequest extends BaseRequest  implements java.io.Serializable 
                         (this.locationCode!=null &&
                                 this.locationCode.equals(other.getLocationCode()))) &&
                 this.commit == other.getCommit() &&
+				this.isSellerImporterOfRecord == other.getIsSellerImporterOfRecord() &&
+				this.bRBuyer_IsExemptOrCannotWH_IRRF == other.getBRBuyer_IsExemptOrCannotWH_IRRF() &&
+				this.bRBuyer_IsExemptOrCannotWH_PISRF == other.getBRBuyer_IsExemptOrCannotWH_PISRF() &&
+				this.bRBuyer_IsExemptOrCannotWH_COFINSRF == other.getBRBuyer_IsExemptOrCannotWH_COFINSRF() &&
+				this.bRBuyer_IsExemptOrCannotWH_CSLLRF == other.getBRBuyer_IsExemptOrCannotWH_CSLLRF() &&
+				this.bRBuyer_IsExempt_PIS == other.getBRBuyer_IsExempt_PIS() &&
+				this.bRBuyer_IsExempt_COFINS == other.getBRBuyer_IsExempt_COFINS() &&
+				this.bRBuyer_IsExempt_CSLL == other.getBRBuyer_IsExempt_CSLL() &&
                 ((this.batchCode==null && other.getBatchCode()==null) ||
                         (this.batchCode!=null &&
                                 this.batchCode.equals(other.getBatchCode()))) &&
@@ -774,6 +972,12 @@ public class GetTaxRequest extends BaseRequest  implements java.io.Serializable 
                 ((this.businessIdentificationNo==null && other.getBusinessIdentificationNo()==null) ||
                         (this.businessIdentificationNo!=null &&
                                 this.businessIdentificationNo.equals(other.getBusinessIdentificationNo())))&&
+                ((this.description==null && other.getDescription()==null) ||
+                        (this.description!=null &&
+                                this.description.equals(other.getDescription())))&&
+                ((this.email==null && other.getEmail()==null) ||
+                        (this.email!=null &&
+                                this.email.equals(other.getEmail())))&&
                 ((this.posLaneCode==null && other.getPosLaneCode()==null) ||
                         (this.posLaneCode!=null &&
                                 this.posLaneCode.equals(other.getPosLaneCode())));
@@ -801,6 +1005,10 @@ public class GetTaxRequest extends BaseRequest  implements java.io.Serializable 
         }
         if (getDocType() != null) {
             _hashCode += getDocType().hashCode();
+        }
+		//Taxsvc2
+        if (getBRBuyerType() != null) {
+            _hashCode += getBRBuyerType().hashCode();
         }
         if (getDocCode() != null) {
             _hashCode += getDocCode().hashCode();
@@ -835,6 +1043,14 @@ public class GetTaxRequest extends BaseRequest  implements java.io.Serializable 
         if (getAddresses() != null) {
             _hashCode += getAddresses().hashCode();
         }
+		//Added for Taxsvc2
+        if (getAddressLocationTypes() != null) {
+            _hashCode += getAddressLocationTypes().hashCode();
+        }
+        if (getParameterBagItems() != null) {
+            _hashCode += getParameterBagItems().hashCode();
+        }
+		//Taxsvc2 end
         if (getLines() != null) {
             _hashCode += getLines().hashCode();
         }
@@ -848,6 +1064,14 @@ public class GetTaxRequest extends BaseRequest  implements java.io.Serializable 
             _hashCode += getLocationCode().hashCode();
         }
         _hashCode += (getCommit() ? Boolean.TRUE : Boolean.FALSE).hashCode();
+        _hashCode += (getIsSellerImporterOfRecord() ? Boolean.TRUE : Boolean.FALSE).hashCode();		//Taxsvc2
+        _hashCode += (getBRBuyer_IsExemptOrCannotWH_IRRF() ? Boolean.TRUE : Boolean.FALSE).hashCode();		//Taxsvc2
+        _hashCode += (getBRBuyer_IsExemptOrCannotWH_PISRF() ? Boolean.TRUE : Boolean.FALSE).hashCode();		//Taxsvc2
+        _hashCode += (getBRBuyer_IsExemptOrCannotWH_COFINSRF() ? Boolean.TRUE : Boolean.FALSE).hashCode();		//Taxsvc2
+        _hashCode += (getBRBuyer_IsExemptOrCannotWH_CSLLRF() ? Boolean.TRUE : Boolean.FALSE).hashCode();		//Taxsvc2
+        _hashCode += (getBRBuyer_IsExempt_PIS() ? Boolean.TRUE : Boolean.FALSE).hashCode();		//Taxsvc2
+        _hashCode += (getBRBuyer_IsExempt_COFINS() ? Boolean.TRUE : Boolean.FALSE).hashCode();		//Taxsvc2
+        _hashCode += (getBRBuyer_IsExempt_CSLL() ? Boolean.TRUE : Boolean.FALSE).hashCode();		//Taxsvc2
          if (getBatchCode() != null) {
             _hashCode += getBatchCode().hashCode();
         }
@@ -875,6 +1099,12 @@ public class GetTaxRequest extends BaseRequest  implements java.io.Serializable 
 		if (getPosLaneCode() != null) {
             _hashCode += getPosLaneCode().hashCode();
         }
+		if (getDescription() != null) {
+            _hashCode += getDescription().hashCode();
+        }
+		if (getEmail() != null) {
+            _hashCode += getEmail().hashCode();
+        }
             __hashCodeCalc = false;
             return _hashCode;
     }
@@ -897,6 +1127,15 @@ public class GetTaxRequest extends BaseRequest  implements java.io.Serializable 
         elemField.setXmlName(new javax.xml.namespace.QName("http://avatax.avalara.com/services", "DocType"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://avatax.avalara.com/services", "DocumentType"));
         elemField.setNillable(false);
+		//Taxsvc2 starts
+        typeDesc.addFieldDesc(elemField);
+        elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("bRBuyerType");
+        elemField.setXmlName(new javax.xml.namespace.QName("http://avatax.avalara.com/services", "BRBuyerType"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://avatax.avalara.com/services", "BRBuyerTypeEnum"));
+        elemField.setMinOccurs(0);
+        elemField.setNillable(false);
+		//Taxsvc2 ends
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("docCode");
@@ -972,7 +1211,25 @@ public class GetTaxRequest extends BaseRequest  implements java.io.Serializable 
         elemField.setXmlType(new javax.xml.namespace.QName("http://avatax.avalara.com/services", "ArrayOfBaseAddress"));
         elemField.setMinOccurs(0);
         elemField.setNillable(false);
+		typeDesc.addFieldDesc(elemField);
+        //Added for Taxsvc2
+		elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("addressLocationTypes");
+        elemField.setXmlName(new javax.xml.namespace.QName("http://avatax.avalara.com/services", "AddressLocationTypes"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "ArrayOfAddressLocationType"));
+        elemField.setMinOccurs(0);
+        elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
+		//Taxsvc2 ends
+        //Added for Taxsvc2
+		elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("parameterBagItems");
+        elemField.setXmlName(new javax.xml.namespace.QName("http://avatax.avalara.com/services", "ParameterBagItems"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "ArrayOfParameterBagItem"));
+        elemField.setMinOccurs(0);
+        elemField.setNillable(false);
+        typeDesc.addFieldDesc(elemField);
+		//Taxsvc2 ends
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("lines");
         elemField.setXmlName(new javax.xml.namespace.QName("http://avatax.avalara.com/services", "Lines"));
@@ -1006,6 +1263,78 @@ public class GetTaxRequest extends BaseRequest  implements java.io.Serializable 
         elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "boolean"));
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
+		//Added for Taxsvc2
+        elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("isSellerImporterOfRecord");
+        elemField.setXmlName(new javax.xml.namespace.QName("http://avatax.avalara.com/services", "IsSellerImporterOfRecord"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "boolean"));
+        elemField.setMinOccurs(0);
+        elemField.setNillable(false);
+        typeDesc.addFieldDesc(elemField);
+		//Taxsvc2 ends
+		//Added for Taxsvc2
+        elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("bRBuyer_IsExemptOrCannotWH_IRRF");
+        elemField.setXmlName(new javax.xml.namespace.QName("http://avatax.avalara.com/services", "BRBuyer_IsExemptOrCannotWH_IRRF"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "boolean"));
+        elemField.setMinOccurs(0);
+        elemField.setNillable(false);
+        typeDesc.addFieldDesc(elemField);
+		//Taxsvc2 ends
+		//Added for Taxsvc2
+        elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("bRBuyer_IsExemptOrCannotWH_PISRF");
+        elemField.setXmlName(new javax.xml.namespace.QName("http://avatax.avalara.com/services", "BRBuyer_IsExemptOrCannotWH_PISRF"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "boolean"));
+        elemField.setMinOccurs(0);
+        elemField.setNillable(false);
+        typeDesc.addFieldDesc(elemField);
+		//Taxsvc2 ends
+		//Added for Taxsvc2
+        elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("bRBuyer_IsExemptOrCannotWH_COFINSRF");
+        elemField.setXmlName(new javax.xml.namespace.QName("http://avatax.avalara.com/services", "BRBuyer_IsExemptOrCannotWH_COFINSRF"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "boolean"));
+        elemField.setMinOccurs(0);
+        elemField.setNillable(false);
+        typeDesc.addFieldDesc(elemField);
+		//Taxsvc2 ends
+		//Added for Taxsvc2
+        elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("bRBuyer_IsExemptOrCannotWH_CSLLRF");
+        elemField.setXmlName(new javax.xml.namespace.QName("http://avatax.avalara.com/services", "BRBuyer_IsExemptOrCannotWH_CSLLRF"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "boolean"));
+        elemField.setMinOccurs(0);
+        elemField.setNillable(false);
+        typeDesc.addFieldDesc(elemField);
+		//Taxsvc2 ends
+		//Added for Taxsvc2
+        elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("bRBuyer_IsExempt_PIS");
+        elemField.setXmlName(new javax.xml.namespace.QName("http://avatax.avalara.com/services", "BRBuyer_IsExempt_PIS"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "boolean"));
+        elemField.setMinOccurs(0);
+        elemField.setNillable(false);
+        typeDesc.addFieldDesc(elemField);
+		//Taxsvc2 ends
+		//Added for Taxsvc2
+        elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("bRBuyer_IsExempt_COFINS");
+        elemField.setXmlName(new javax.xml.namespace.QName("http://avatax.avalara.com/services", "BRBuyer_IsExempt_COFINS"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "boolean"));
+        elemField.setMinOccurs(0);
+        elemField.setNillable(false);
+        typeDesc.addFieldDesc(elemField);
+		//Taxsvc2 ends
+		//Added for Taxsvc2
+        elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("bRBuyer_IsExempt_CSLL");
+        elemField.setXmlName(new javax.xml.namespace.QName("http://avatax.avalara.com/services", "BRBuyer_IsExempt_CSLL"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "boolean"));
+        elemField.setMinOccurs(0);
+        elemField.setNillable(false);
+        typeDesc.addFieldDesc(elemField);
+		//Taxsvc2 ends
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("batchCode");
         elemField.setXmlName(new javax.xml.namespace.QName("http://avatax.avalara.com/services", "BatchCode"));
@@ -1065,6 +1394,24 @@ public class GetTaxRequest extends BaseRequest  implements java.io.Serializable 
         elemField.setMinOccurs(0);
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
+		//Added for Taxsvc2
+		elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("description");
+        elemField.setXmlName(new javax.xml.namespace.QName("http://avatax.avalara.com/services", "Description"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
+        elemField.setMinOccurs(0);
+        elemField.setNillable(false);
+        typeDesc.addFieldDesc(elemField);
+		//Taxsvc2 ends
+		//Added for Taxsvc2
+		elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("email");
+        elemField.setXmlName(new javax.xml.namespace.QName("http://avatax.avalara.com/services", "Email"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
+        elemField.setMinOccurs(0);
+        elemField.setNillable(false);
+        typeDesc.addFieldDesc(elemField);
+		//Taxsvc2 ends
     }
 
     /**

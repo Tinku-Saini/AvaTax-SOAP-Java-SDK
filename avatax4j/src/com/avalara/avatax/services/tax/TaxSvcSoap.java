@@ -36,7 +36,7 @@ package com.avalara.avatax.services.tax;
  * @author greggr
  * Copyright (c) 2005, Avalara.  All rights reserved.
  */
-public interface TaxSvcSoap extends com.avalara.avatax.services.base.BaseSvcSoap {
+	public interface TaxSvcSoap extends com.avalara.avatax.services.base.BaseSvcSoap {
 
 
     /**
@@ -195,7 +195,10 @@ public interface TaxSvcSoap extends com.avalara.avatax.services.base.BaseSvcSoap
      */
     public com.avalara.avatax.services.tax.ApplyPaymentResult applyPayment(com.avalara.avatax.services.tax.ApplyPaymentRequest applyPaymentRequest) throws java.rmi.RemoteException;
     
+	//Taxsvc2
+    public com.avalara.avatax.services.tax.GetParameterBagItemsResult getParameterBagItems(com.avalara.avatax.services.tax.GetParameterBagItemsRequest getParameterBagItemsRequest) throws java.rmi.RemoteException;
 
-
-
+	//Taxsvc2
+	//Removed GetParameterBagItemsRequest parameter, as it doens't accept any paramter and returns all data
+     public com.avalara.avatax.services.tax.GetAllParameterBagItemsResult getAllParameterBagItems(com.avalara.avatax.services.tax.GetParameterBagItemsRequest getParameterBagItemsRequest) throws java.rmi.RemoteException;
 }

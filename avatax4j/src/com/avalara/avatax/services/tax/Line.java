@@ -7,6 +7,8 @@
 
 package com.avalara.avatax.services.tax;
 
+import java.util.Map;
+
 /**
  * A single line within a document containing data used for calculating tax.
  * @see GetTaxRequest
@@ -45,6 +47,12 @@ public class Line  implements java.io.Serializable {
     private boolean taxIncluded;
     private java.lang.String businessIdentificationNo;
 
+	//Added for Taxsvc2
+    private java.lang.String unitOfMeasurement;
+    private com.avalara.avatax.services.tax.ArrayOfAddressLocationType addressLocationTypes;
+    //private com.avalara.avatax.services.tax.ArrayOfParameterBagItem parameterBagItems;
+    public Map<String,String> parameterBagItems;
+	
     /**
      * Creates a new line object.
      *
@@ -86,8 +94,11 @@ public class Line  implements java.io.Serializable {
             java.lang.String exemptionNo,
             java.lang.String customerUsageType,
             java.lang.String description,
-           com.avalara.avatax.services.tax.TaxOverride taxOverride,
-           java.lang.String businessIdentificationNo) {
+			com.avalara.avatax.services.tax.TaxOverride taxOverride,
+			java.lang.String businessIdentificationNo,
+			java.lang.String unitOfMeasurement,
+			com.avalara.avatax.services.tax.ArrayOfAddressLocationType addressLocationTypes,
+			Map<String,String> parameterBagItems) {
         this.no = no;
         this.originCode = originCode;
         this.destinationCode = destinationCode;
@@ -102,8 +113,11 @@ public class Line  implements java.io.Serializable {
         this.exemptionNo = exemptionNo;
         this.customerUsageType = customerUsageType;
         this.description = description;
-           this.taxOverride = taxOverride;
+        this.taxOverride = taxOverride;
         this.businessIdentificationNo = businessIdentificationNo ;
+		this.unitOfMeasurement = unitOfMeasurement ;						//Taxsvc2
+		this.addressLocationTypes = addressLocationTypes ;					//Taxsvc2
+		this.parameterBagItems = parameterBagItems ;						//Taxsvc2
     }
 
 
@@ -525,6 +539,23 @@ public class Line  implements java.io.Serializable {
         return businessIdentificationNo;
     }
 
+    /**	Taxsvc2	*/
+    public String getUnitOfMeasurement() {
+        return unitOfMeasurement;
+    }
+
+    /**	Taxsvc2
+     */
+    public com.avalara.avatax.services.tax.ArrayOfAddressLocationType getAddressLocationTypes() {
+        return addressLocationTypes;
+    }
+
+    /**	Taxsvc2
+     */
+    //public com.avalara.avatax.services.tax.ArrayOfParameterBagItem getParameterBagItems() {
+    public Map<String,String> getParameterBagItems()	{
+        return parameterBagItems;
+    }
 
     /**
      * Sets the Business Identification No..
@@ -534,6 +565,29 @@ public class Line  implements java.io.Serializable {
 
     public void setBusinessIdentificationNo(String businessIdentificationNo) {
         this.businessIdentificationNo = businessIdentificationNo;
+    }
+
+    /**
+     * Taxsvc2
+     */
+
+    public void setUnitOfMeasurement(String unitOfMeasurement) {
+        this.unitOfMeasurement = unitOfMeasurement;
+    }
+
+     /* Taxsvc2
+     * @param addressLocationTypes
+     */
+    public void setAddressLocationTypes(com.avalara.avatax.services.tax.ArrayOfAddressLocationType addressLocationTypes)
+    {
+        this.addressLocationTypes = addressLocationTypes;
+    }
+
+     /* Taxsvc2
+     */
+    public void setParameterBagItems(Map<String,String> parameterBagItems)
+    {
+        this.parameterBagItems = parameterBagItems;
     }
 
     private java.lang.Object __equalsCalc = null;
@@ -593,13 +647,21 @@ public class Line  implements java.io.Serializable {
              (this.taxOverride!=null &&
               this.taxOverride.equals(other.getTaxOverride()))) &&
                 this.taxIncluded == other.isTaxIncluded() &&
-                ((this.businessIdentificationNo==null && other.getBusinessIdentificationNo()==null) ||
+                ((this.unitOfMeasurement==null && other.getUnitOfMeasurement()==null) ||
+                (this.unitOfMeasurement!=null && this.unitOfMeasurement.equals(other.getUnitOfMeasurement())))	&&
+                ((this.addressLocationTypes==null && other.getAddressLocationTypes()==null) ||
+                        (this.addressLocationTypes!=null &&
+                                this.addressLocationTypes.equals(other.getAddressLocationTypes()))) &&
+                ((this.parameterBagItems==null && other.getParameterBagItems()==null) ||
+                        (this.parameterBagItems!=null &&
+                                this.parameterBagItems.equals(other.getParameterBagItems()))) &&
+				((this.businessIdentificationNo==null && other.getBusinessIdentificationNo()==null) ||
                 (this.businessIdentificationNo!=null && this.businessIdentificationNo.equals(other.getBusinessIdentificationNo())));
         __equalsCalc = null;
         return _equals;
     }
 
-    private boolean __hashCodeCalc = false;
+	private boolean __hashCodeCalc = false;
 
     /**
      *  Serves as a hash function for a particular type,
@@ -660,6 +722,17 @@ public class Line  implements java.io.Serializable {
         if (getBusinessIdentificationNo() != null) {
             _hashCode += getBusinessIdentificationNo().hashCode();
         }
+		//Taxsvc2
+        if (getUnitOfMeasurement() != null) {
+            _hashCode += getUnitOfMeasurement().hashCode();
+        }
+        if (getAddressLocationTypes() != null) {
+            _hashCode += getAddressLocationTypes().hashCode();
+        }
+        if (getParameterBagItems() != null) {
+            _hashCode += getParameterBagItems().hashCode();
+        }
+		//Taxsvc2 end
         _hashCode += (isTaxIncluded() ? Boolean.TRUE : Boolean.FALSE).hashCode();
         __hashCodeCalc = false;
         return _hashCode;
@@ -786,6 +859,15 @@ public class Line  implements java.io.Serializable {
         elemField.setMinOccurs(0);
         elemField.setNillable(false);
         typeDesc.addFieldDesc(elemField);
+        //Added for Taxsvc2
+		elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("unitOfMeasurement");
+        elemField.setXmlName(new javax.xml.namespace.QName("http://avatax.avalara.com/services", "UnitOfMeasurement"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
+        elemField.setMinOccurs(0);
+        elemField.setNillable(false);
+        typeDesc.addFieldDesc(elemField);
+		//Taxsvc2 end
     }
 
     /**
